@@ -13,7 +13,7 @@ void FPSCounter::Update(float dt) {
 	if (++counter > max_count) {
 		// Once counter reaches max count, reset counter and update text
 		counter = 0;
-		this->set_text("fps: " + std::to_string((int)(1/dt_average)));
+		this->set_text("fps: " + std::to_string((int)(1 / dt_average)));
 		dt_average = 0;
 	}
 }

@@ -12,7 +12,7 @@ private:
 public:
 	Text(Game* game);
 	Text(Game* game, std::string text, raylib::Vector2 pos, int size, raylib::Color color);
-	
+
 	void Update(float dt);
 	void Draw();
 

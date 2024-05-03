@@ -9,7 +9,7 @@
 class Game {
 private:
 	// The player to be rendered at center of screen
-    Player *player;
+	Player* player;
 
 	// All game entities that are rendered relative to player using relative map coordinates
 	std::vector<GameEntity*> entities;
@@ -25,14 +25,14 @@ private:
 public:
 	Game();
 	~Game();
-	
+
 	void UpdateAll();
 	void DrawAll(raylib::Camera2D camera);
 	void AddEntity(GameEntity* entity);
 	void AddUIEntity(GameEntity* entity);
 
 	// Get a reference to the player object
-    Player *get_player();
+	Player* get_player();
 };
 
 #endif
