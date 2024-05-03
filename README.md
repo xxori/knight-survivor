@@ -21,59 +21,72 @@ make
 ./game
 ```
 
-## UML
+## Class Diagram
 
 ```mermaid
 classDiagram
     class Game {
         -Player player
-        -vector~GameEntity~ entities
-        -vector~GameEntity~ ui_entities
-        -float dt
-        +UpdateAll()
-        +DrawAll(Camera2D camera)
-        +AddEntity(GameEntity entity)
-        +AddUIEntity(GameEntity entity)
-        +get_player() Player
+        -GameObject[] enemies
+        -GameObject[] uiElements
+        -GameObject[] projectiles
+        -bool pause
+        +updateAll()
+        +drawAll(Camera2D camera)
+        +addEntity(GameObject entity)
+        +addUIElement(GameObject entity)
     }
-    Game o-- GameEntity
-    class GameEntity {
-        -Vector2 pos
+    Game o-- GameObject
+    GameObject <-- Game
+    class GameObject {
+        -Vector2 position
         -Game game
-        +GameEntity(Game game)
-        +Update(float dt)*
-        +Draw()*
-        +get_pos() Vector2
-        +set_pos(Vector2 pos)
-        +get_game() Game
+        +update(float deltaTime)*
+        +draw()*
     }
+    class GameEntity {
+        -Texture texture
+        -Rectangle collider
+        +collide(GameEntity other) bool
+    }
+    GameObject <|-- GameEntity
     class Player {
-        -float speed$
-        +Player(Game game)
+        -float speed
+        -Weapon[] weapon
+        -int health
+        -time lastDamaged
+        -Vector2 direction
+        +takeDamage(int damage)
     }
     GameEntity <|-- Player
+    Game <-- Player
+    class Enemy {
+        -string name
+        -int health
+        -int damage
+        -time lastDamaged
+    }
+    GameEntity <|-- Enemy
+    class Weapon {
+        -string name
+        -float fireSpeed
+        -time lastFire
+        +fireProjectile()
+    }
+    Player o-- Weapon
+    class Projectile {
+        -int damage
+        -float speed
+    }
+    GameEntity <|-- Projectile
+    class Background {
+        -Texture texture
+    }
+    GameObject <|-- Background
     class Text {
         -string text
-        -int size
         -Color color
-        +Text(Game game)
-        +Text(Game game, string text, Vector2 pos, int size, Color color)
-        +get_size() int
-        +set_size(int size)
-        +get_text() string
-        +set_text(string text)
-    }
-    GameEntity <|-- Text
-    class Background {
         -int size
-        +Background(Game game, int size)
     }
-    GameEntity <|-- Background
-    class FPSCounter {
-        -int max_count$
-        -int counter
-        -float dt_average
-        +FPSCounter(Game game)
-    }
-    Text <|-- FPSCounter
+    GameObject <|-- Text
 ```
