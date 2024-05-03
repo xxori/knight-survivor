@@ -1,5 +1,5 @@
-#ifndef TEXT_HPP
-#define TEXT_HPP
+#pragma once
+
 #include "GameEntity.hpp"
 
 // A simple text class that represents some text rendered to the screen
@@ -21,5 +21,3 @@ public:
 	std::string get_text();
 	void set_text(std::string text);
 };
-
-#endif

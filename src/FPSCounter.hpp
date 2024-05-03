@@ -1,5 +1,5 @@
-#ifndef FPS_COUNTER_HPP
-#define FPS_COUNTER_HPP
+#pragma once
+
 #include "Text.hpp"
 
 // A FPS Counter text for debugging use to measure game speed
@@ -17,5 +17,3 @@ public:
 	FPSCounter(Game* game);
 	void Update(float dt) override;
 };
-
-#endif

@@ -1,5 +1,5 @@
-#ifndef BACKGROUND_HPP
-#define BACKGROUND_HPP
+#pragma once
+
 #include "GameEntity.hpp"
 
 // Background texture class
@@ -14,5 +14,3 @@ public:
 	Background(Game* game, int size);
 	void Draw();
 };
-
-#endif

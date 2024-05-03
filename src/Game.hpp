@@ -1,5 +1,5 @@
-#ifndef GAME_HPP
-#define GAME_HPP
+#pragma once
+
 #include "GameEntity.hpp"
 #include "Player.hpp"
 #include "raylib-cpp.hpp" // IWYU pragma: keep
@@ -34,5 +34,3 @@ public:
 	// Get a reference to the player object
 	Player* get_player();
 };
-
-#endif

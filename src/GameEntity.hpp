@@ -1,5 +1,5 @@
-#ifndef GAMEENTITY_HPP
-#define GAMEENTITY_HPP
+#pragma once
+
 #include "raylib-cpp.hpp" // IWYU pragma: keep
 
 // Forward declaration of Game class
@@ -21,5 +21,3 @@ public:
 	void set_pos(raylib::Vector2 pos);
 	Game* get_game();
 };
-
-#endif

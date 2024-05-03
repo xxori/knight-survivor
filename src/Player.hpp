@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
+
 #include "GameEntity.hpp"
 
 // The player entity is controlled by the player and is responsible for
@@ -13,5 +13,3 @@ public:
 	void Update(float dt) override;
 	void Draw() override;
 };
-
-#endif
