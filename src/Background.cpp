@@ -9,8 +9,8 @@ void Background::Draw() {
 
 	// Camera is rendered relative to player, with a half screen size offset
 	// We want to move the tiles as the player moves too, so we add a mod size offset
-	int startX = -playerPos.x + (int)playerPos.x % size + 800 / 2.0;
-	int startY = -playerPos.y + (int)playerPos.y % size + 450 / 2.0;
+	int startX = -playerPos.x + static_cast<int>(playerPos.x) % size + 800 / 2.0;
+	int startY = -playerPos.y + static_cast<int>(playerPos.y) % size + 450 / 2.0;
 
 	// Loop from one square left of the screen to one square right of the screen
 	for (int x = -size; x < 800 + size; x += size) {
@@ -19,9 +19,8 @@ void Background::Draw() {
 			int newX = x - startX;
 			int newY = y - startY;
 
-		// Create the checkerboard colors using mod 2 of the tile location
-		raylib:
-			Color color = ((x - (int)(playerPos.x / size)) + (y - (int)(playerPos.y / size))) % 2 == 0 ? GRAY : WHITE;
+			// Create the checkerboard colors using mod 2 of the tile location
+			raylib::Color color = ((x - static_cast<int>(playerPos.x / size)) + (y - static_cast<int>(playerPos.y / size))) % 2 == 0 ? GRAY : WHITE;
 			DrawRectangle(newX, newY, size, size, color);
 		}
 	}
