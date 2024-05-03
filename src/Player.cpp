@@ -5,23 +5,22 @@ float Player::speed = 20;
 Player::Player(Game* game) : GameEntity(game) {}
 
 void Player::Update(float dt) {
-    // Move around using arrow keys scaled by speed and dt
+	// Move around using arrow keys scaled by speed and dt
+	raylib::Vector2 movement = raylib::Vector2(0, 0);
 	if (IsKeyDown(KEY_LEFT)) {
-		raylib::Vector2 pos = get_pos();
-		set_pos(raylib::Vector2(pos.x - speed * dt, pos.y));
+		movement.x--;
 	}
 	if (IsKeyDown(KEY_UP)) {
-		raylib::Vector2 pos = get_pos();
-		set_pos(raylib::Vector2(pos.x, pos.y - speed * dt));
+		movement.y--;
 	}
 	if (IsKeyDown(KEY_DOWN)) {
-		raylib::Vector2 pos = get_pos();
-		set_pos(raylib::Vector2(pos.x, pos.y + speed * dt));
+		movement.y++;
 	}
 	if (IsKeyDown(KEY_RIGHT)) {
-		raylib::Vector2 pos = get_pos();
-		set_pos(raylib::Vector2(pos.x + speed * dt, pos.y));
+		movement.x++;
 	}
+	raylib::Vector2 pos = get_pos();
+	set_pos(pos + movement.Normalize() * dt * speed);
 }
 
 // TODO: Replace this with a sprite and animations
