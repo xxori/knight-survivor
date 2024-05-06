@@ -15,9 +15,9 @@ private:
 
 public:
 	GameEntity(Game* game);
-	virtual void Update(float dt);
-	virtual void Draw();
-	raylib::Vector2 get_pos();
-	void set_pos(raylib::Vector2 pos);
-	Game* get_game();
+	virtual void update(float dt);
+	virtual void draw();
+	raylib::Vector2 getPos();
+	void setPos(raylib::Vector2 pos);
+	Game* getGame();
 };

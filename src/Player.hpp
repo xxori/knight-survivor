@@ -10,6 +10,6 @@ private:
 
 public:
 	Player(Game* game);
-	void Update(float dt) override;
-	void Draw() override;
+	void update(float dt) override;
+	void draw() override;
 };

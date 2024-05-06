@@ -4,7 +4,7 @@ float Player::speed = 20;
 
 Player::Player(Game* game) : GameEntity(game) {}
 
-void Player::Update(float dt) {
+void Player::update(float dt) {
 	// Move around using arrow keys scaled by speed and dt
 	raylib::Vector2 movement = raylib::Vector2(0, 0);
 	if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
@@ -19,11 +19,11 @@ void Player::Update(float dt) {
 	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
 		movement.x++;
 	}
-	raylib::Vector2 pos = get_pos();
-	set_pos(pos + movement.Normalize() * dt * speed);
+	raylib::Vector2 pos = getPos();
+	setPos(pos + movement.Normalize() * dt * speed);
 }
 
 // TODO: Replace this with a sprite and animations
-void Player::Draw() {
-	DrawCircleV(get_pos(), 20, BLACK);
+void Player::draw() {
+	DrawCircleV(getPos(), 20, BLACK);
 }
