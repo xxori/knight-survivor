@@ -5,9 +5,9 @@
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
-Game::Game() : entities(), ui_entities(), dt(0) {
-	AddEntity(new Background(this, 25));
-	AddUIEntity(new FPSCounter(this));
+Game::Game() : entities(), uiEntities(), dt(0) {
+	addEntity(new Background(this, 25));
+	addUIEntity(new FPSCounter(this));
 	player = new Player(this);
 }
 
@@ -16,7 +16,7 @@ Game::~Game() {
 	for (auto entity : entities) {
 		delete entity;
 	}
-	for (auto uentity : ui_entities) {
+	for (auto uentity : uiEntities) {
 		delete uentity;
 	}
 	delete player;
@@ -24,41 +24,41 @@ Game::~Game() {
 
 // Calculate dt, tick all entities
 // TODO: Consider precedence of ticking i.e. should monsters be ticked before player, etc
-void Game::UpdateAll() {
+void Game::updateAll() {
 	dt = GetFrameTime();
-	player->Update(dt);
+	player->update(dt);
 	for (auto entity : entities) {
-		entity->Update(dt);
+		entity->update(dt);
 	}
-	for (auto uentity : ui_entities) {
-		uentity->Update(dt);
+	for (auto uEntity : uiEntities) {
+		uEntity->update(dt);
 	}
 }
 
 // Draw all elements, in order of first added drawn on bottom
 // All UI elements are drawn on top of all game elements
 // Game elements are drawn using perspective camera
-void Game::DrawAll(raylib::Camera2D camera) {
+void Game::drawAll(raylib::Camera2D camera) {
 	BeginDrawing();
 	ClearBackground(WHITE);
 	BeginMode2D(camera);
 	for (auto entity : entities) {
-		entity->Draw();
+		entity->draw();
 	}
-	player->Draw();
+	player->draw();
 	EndMode2D();
-	for (auto uentity : ui_entities) {
-		uentity->Draw();
+	for (auto uentity : uiEntities) {
+		uentity->draw();
 	}
 	EndDrawing();
 }
 
-Player* Game::get_player() { return player; }
+Player* Game::getPlayer() { return player; }
 
-void Game::AddEntity(GameEntity* entity) {
+void Game::addEntity(GameEntity* entity) {
 	entities.push_back(entity);
 }
 
-void Game::AddUIEntity(GameEntity* entity) {
-	ui_entities.push_back(entity);
+void Game::addUIEntity(GameEntity* entity) {
+	uiEntities.push_back(entity);
 }

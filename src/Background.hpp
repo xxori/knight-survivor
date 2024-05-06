@@ -12,5 +12,5 @@ private:
 
 public:
 	Background(Game* game, int size);
-	void Draw();
+	void draw();
 };

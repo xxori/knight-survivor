@@ -13,11 +13,11 @@ public:
 	Text(Game* game);
 	Text(Game* game, std::string text, raylib::Vector2 pos, int size, raylib::Color color);
 
-	void Update(float dt);
-	void Draw();
+	void update(float dt);
+	void draw();
 
-	int get_size();
-	void set_size(int size);
-	std::string get_text();
-	void set_text(std::string text);
+	int getSize();
+	void setSize(int size);
+	std::string getText();
+	void setText(std::string text);
 };

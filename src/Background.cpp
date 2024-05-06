@@ -3,9 +3,9 @@
 
 Background::Background(Game* game, int size) : GameEntity(game), size(size) {}
 
-void Background::Draw() {
+void Background::draw() {
 	// Grab player position using Game reference
-	raylib::Vector2 playerPos = this->get_game()->get_player()->get_pos();
+	raylib::Vector2 playerPos = this->getGame()->getPlayer()->getPos();
 
 	// Camera is rendered relative to player, with a half screen size offset
 	// We want to move the tiles as the player moves too, so we add a mod size offset

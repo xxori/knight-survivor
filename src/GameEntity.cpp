@@ -1,8 +1,8 @@
 #include "GameEntity.hpp"
 
 GameEntity::GameEntity(Game* game) : game(game) {}
-void GameEntity::Update(float dt) {}
-void GameEntity::Draw() {}
-raylib::Vector2 GameEntity::get_pos() { return pos; }
-void GameEntity::set_pos(raylib::Vector2 pos) { this->pos = pos; }
-Game* GameEntity::get_game() { return game; }
+void GameEntity::update(float dt) {}
+void GameEntity::draw() {}
+raylib::Vector2 GameEntity::getPos() { return pos; }
+void GameEntity::setPos(raylib::Vector2 pos) { this->pos = pos; }
+Game* GameEntity::getGame() { return game; }

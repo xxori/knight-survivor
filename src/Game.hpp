@@ -16,7 +16,7 @@ private:
 
 	// All UI elements that are rendered using absolute coordinates on the screen
 	// TODO: Maybe make this a different class than GameEntity?
-	std::vector<GameEntity*> ui_entities;
+	std::vector<GameEntity*> uiEntities;
 
 	// Time since last frame. Can be used to calculate FPS
 	// Also used in physics calculations to make game run same regardless of FPS
@@ -26,11 +26,11 @@ public:
 	Game();
 	~Game();
 
-	void UpdateAll();
-	void DrawAll(raylib::Camera2D camera);
-	void AddEntity(GameEntity* entity);
-	void AddUIEntity(GameEntity* entity);
+	void updateAll();
+	void drawAll(raylib::Camera2D camera);
+	void addEntity(GameEntity* entity);
+	void addUIEntity(GameEntity* entity);
 
 	// Get a reference to the player object
-	Player* get_player();
+	Player* getPlayer();
 };

@@ -17,16 +17,16 @@ int main() {
 	// Create a 2D camera centered on the player
 	// This allows us to use rotation and zoom in the future
 	raylib::Camera2D camera = raylib::Camera2D();
-	camera.target = game.get_player()->get_pos();
-	camera.offset = (Vector2) { SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f };
+	camera.target = game.getPlayer()->getPos();
+	camera.offset = raylib::Vector2(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0);
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f;
 
 	// Simple game loop, closes when press escape or x button
 	while (!window.ShouldClose()) {
-		game.UpdateAll();
-		camera.target = game.get_player()->get_pos();
-		game.DrawAll(camera);
+		game.updateAll();
+		camera.target = game.getPlayer()->getPos();
+		game.drawAll(camera);
 	}
 
 	return 0;
