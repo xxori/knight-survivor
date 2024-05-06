@@ -6,7 +6,7 @@
 // triggering pauses, spawning projectiles, dying, etc
 class Player : public GameEntity {
 private:
-	static float speed;
+	float speed;
 
 public:
 	Player(Game* game);

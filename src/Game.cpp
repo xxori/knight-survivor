@@ -5,7 +5,7 @@
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
-Game::Game() : entities(), uiEntities(), dt(0) {
+Game::Game() : entities(), uiEntities() {
 	addEntity(new Background(this, 25));
 	addUIEntity(new FPSCounter(this));
 	player = new Player(this);
@@ -25,7 +25,7 @@ Game::~Game() {
 // Calculate dt, tick all entities
 // TODO: Consider precedence of ticking i.e. should monsters be ticked before player, etc
 void Game::updateAll() {
-	dt = GetFrameTime();
+	float dt = GetFrameTime();
 	player->update(dt);
 	for (auto entity : entities) {
 		entity->update(dt);

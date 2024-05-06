@@ -1,8 +1,6 @@
 #include "Player.hpp"
 
-float Player::speed = 20;
-
-Player::Player(Game* game) : GameEntity(game) {}
+Player::Player(Game* game) : GameEntity(game), speed(100.0) {}
 
 void Player::update(float dt) {
 	// Move around using arrow keys scaled by speed and dt

@@ -18,10 +18,6 @@ private:
 	// TODO: Maybe make this a different class than GameEntity?
 	std::vector<GameEntity*> uiEntities;
 
-	// Time since last frame. Can be used to calculate FPS
-	// Also used in physics calculations to make game run same regardless of FPS
-	float dt;
-
 public:
 	Game();
 	~Game();
