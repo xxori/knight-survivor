@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "Background.hpp"
 #include "FPSCounter.hpp"
-#include <raylib.h>
+#include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class

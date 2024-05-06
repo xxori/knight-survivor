@@ -20,6 +20,10 @@
 	      llvmPackages_18.libcxx
 	      raylib
 	      cmake
+        darwin.CarbonHeaders
+        darwin.apple_sdk.frameworks.Cocoa
+        darwin.apple_sdk.frameworks.IOKit
+        darwin.apple_sdk.frameworks.Kernel
             ];
         };
       }
