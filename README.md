@@ -30,6 +30,10 @@ classDiagram
         -GameObject[] enemies
         -GameObject[] uiElements
         -GameObject[] projectiles
+        -UIElement[] mainMenu
+        -UIElement[] pauseMenu
+        -UIElement[] diedMenu
+        -enum gameState
         -bool pause
         +updateAll()
         +drawAll(Camera2D camera)
