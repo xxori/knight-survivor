@@ -51,14 +51,19 @@ void Game::drawAll(raylib::Camera2D camera) {
 	for (auto entity : enemies) {
 		entity->draw();
 	}
+	player->draw();
 	for (auto entity : projectiles) {
 		entity->draw();
 	}
-	player->draw();
 	EndMode2D();
 	for (auto uentity : uiObjects) {
 		uentity->draw();
 	}
+
+	// Uncomment to show middle of screen
+	// DrawRectangle(0, 450 / 2, 800, 1, GREEN);
+	// DrawRectangle(800 / 2, 0, 1, 450, GREEN);
+
 	EndDrawing();
 }
 
@@ -68,8 +73,24 @@ void Game::addEnemy(GameObject* obj) {
 	enemies.push_back(obj);
 }
 
-void Game::addProjectile(GameObject* obj) {
+void Game::removeEnemy(GameObject* obj) {
+	for (int i = 0; i < enemies.size(); i++)
+		if (enemies[i] == obj)
+			enemies.erase(enemies.begin() + i);
+	delete obj;
+	return;
+}
+
+void Game::addProjectile(Projectile* obj) {
 	projectiles.push_back(obj);
+}
+
+void Game::removeProjectile(Projectile* obj) {
+	for (int i = 0; i < projectiles.size(); i++)
+		if (projectiles[i] == obj)
+			projectiles.erase(projectiles.begin() + i);
+	delete obj;
+	return;
 }
 
 void Game::addUIObject(GameObject* obj) {

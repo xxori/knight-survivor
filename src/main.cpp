@@ -18,7 +18,7 @@ int main() {
 	// This allows us to use rotation and zoom in the future
 	raylib::Camera2D camera = raylib::Camera2D();
 	camera.target = game.getPlayer()->getPos();
-	camera.offset = raylib::Vector2(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0);
+	camera.offset = raylib::Vector2(SCREEN_WIDTH / 2.0 - game.getPlayer()->getCollider().GetWidth() / 2.0, SCREEN_HEIGHT / 2.0 - game.getPlayer()->getCollider().GetHeight() / 2.0);
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f;
 

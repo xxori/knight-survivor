@@ -9,8 +9,8 @@ private:
 
 public:
 	GameEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture);
+	~GameEntity() override;
 	raylib::Rectangle getCollider();
 	void setCollider(raylib::Rectangle collider);
 	bool collide(GameEntity* other);
-	virtual void draw() = 0;
 };

@@ -1,8 +1,21 @@
 #include "Player.hpp"
+#include "FireStaff.hpp"
+#include <raylib.h>
 
-Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 20, 20), nullptr), speed(100.0) {}
-
+Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
+	weapons.push_back(new FireStaff(game, 5));
+}
+Player::~Player() {
+	for (auto weapon : weapons) {
+		delete weapon;
+	}
+}
 void Player::update(float dt) {
+
+	for (auto weapon : weapons) {
+		weapon->update(dt);
+	}
+
 	// Move around using arrow keys scaled by speed and dt
 	raylib::Vector2 movement = raylib::Vector2(0, 0);
 	if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
@@ -23,5 +36,7 @@ void Player::update(float dt) {
 
 // TODO: Replace this with a sprite and animations
 void Player::draw() {
-	DrawCircleV(getPos() + raylib::Vector2(10, 10), 20, BLACK);
+	DrawCircleV(getPos() + raylib::Vector2(20, 20), 20, BLACK);
+	// Uncomment to show collider
+	// DrawRectangleLinesEx(getCollider(), 1, raylib::Color::Red());
 }
