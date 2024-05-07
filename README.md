@@ -28,17 +28,20 @@ classDiagram
     class Game {
         -Player player
         -GameObject[] enemies
-        -GameObject[] uiElements
-        -GameObject[] projectiles
-        -UIElement[] mainMenu
-        -UIElement[] pauseMenu
-        -UIElement[] diedMenu
+        -GameObject[] UIElements
+        -Projectile[] projectiles
+        -GameObject[] mainMenu
+        -GameObject[] pauseMenu
+        -GameObject[] deathMenu
         -enum gameState
-        -bool pause
         +updateAll()
         +drawAll(Camera2D camera)
-        +addEntity(GameObject entity)
-        +addUIElement(GameObject entity)
+        +addEnemy(GameEntity *enemy)
+        +addProjectile(Projectile *projectile)
+        +removeEnemy(GameEntity *enemy)
+        +removeProjectile(Projectile *projectile)
+        +addUIElement(GameObject *element)
+        +removeUIElement(GameObject *element)
     }
     Game o-- GameObject
     GameObject <-- Game
@@ -56,7 +59,7 @@ classDiagram
     GameObject <|-- GameEntity
     class Player {
         -float speed
-        -Weapon[] weapon
+        -Weapon[] weapons
         -int health
         -time lastDamaged
         -Vector2 direction
@@ -74,13 +77,14 @@ classDiagram
     class Weapon {
         -string name
         -float fireSpeed
-        -time lastFire
-        +fireProjectile()
+        -time timeToFire
+        +update(float deltaTime)
     }
     Player o-- Weapon
     class Projectile {
         -int damage
         -float speed
+        +update(float DeltaTime)
     }
     GameEntity <|-- Projectile
     class Background {
@@ -93,4 +97,12 @@ classDiagram
         -int size
     }
     GameObject <|-- Text
+    class Button {
+        -string text
+        -int width
+        -int height
+        -int fontSize
+        -Color color
+    }
+    GameObject <|-- Button
 ```
