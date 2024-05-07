@@ -6,6 +6,9 @@
 #include "raylib-cpp.hpp" // IWYU pragma: keep
 #include <vector>
 
+const int SCREEN_HEIGHT = 450;
+const int SCREEN_WIDTH = 800;
+
 // Overall game state object, holding all other objects
 class Game {
 private:

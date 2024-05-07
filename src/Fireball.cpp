@@ -11,11 +11,10 @@ void Fireball::update(float dt) {
 
 	raylib::Vector2 playerPos = getGame()->getPlayer()->getPos() + raylib::Vector2(getGame()->getPlayer()->getCollider().GetWidth() / 2, getGame()->getPlayer()->getCollider().GetHeight() / 2);
 	setPos(playerPos + raylib::Vector2(r * std::cos(theta), r * std::sin(theta)));
-	if (abs(getPos().x - playerPos.x) > 800 / 2.0 || abs(getPos().y - playerPos.y) > 450 / 2.0) {
+	if (abs(getPos().x - playerPos.x) > SCREEN_WIDTH / 2.0 || abs(getPos().y - playerPos.y) > SCREEN_HEIGHT / 2.0)
 		getGame()->removeProjectile(this);
-	}
 
-	// Contact collisions using parent class.
+	// Compute collisions using parent class.
 	Projectile::update(dt);
 }
 

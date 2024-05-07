@@ -1,9 +1,6 @@
 #include "Game.hpp"
 #include "raylib-cpp.hpp" // IWYU pragma: keep
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 450;
-
 int main() {
 
 	// Use vsync instead of a capped FPS
