@@ -1,8 +1,9 @@
 #include "Background.hpp"
 #include "Game.hpp"
 
-Background::Background(Game* game, int size) : GameEntity(game), size(size) {}
+Background::Background(Game* game, int size) : GameObject(game, raylib::Vector2(0, 0)), size(size) {}
 
+void Background::update(float dt) {}
 void Background::draw() {
 	// Grab player position using Game reference
 	raylib::Vector2 playerPos = this->getGame()->getPlayer()->getPos();

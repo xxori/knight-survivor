@@ -1,8 +1,17 @@
 #include "GameEntity.hpp"
+#include "Game.hpp"
+#include "Rectangle.hpp"
 
-GameEntity::GameEntity(Game* game) : game(game) {}
-void GameEntity::update(float dt) {}
-void GameEntity::draw() {}
-raylib::Vector2 GameEntity::getPos() { return pos; }
-void GameEntity::setPos(raylib::Vector2 pos) { this->pos = pos; }
-Game* GameEntity::getGame() { return game; }
+GameEntity::GameEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture) : localCollider(collider), GameObject(game, pos), texture(texture) {}
+
+raylib::Rectangle GameEntity::getCollider() {
+	raylib::Rectangle c = localCollider;
+	c.SetPosition(this->getPos());
+	return c;
+}
+
+bool GameEntity::collide(GameEntity* other) {
+	raylib::Rectangle me = getCollider();
+	raylib::Rectangle them = other->getCollider();
+	return me.CheckCollision(them);
+}

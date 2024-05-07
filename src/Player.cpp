@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(Game* game) : GameEntity(game), speed(100.0) {}
+Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 20, 20), nullptr), speed(100.0) {}
 
 void Player::update(float dt) {
 	// Move around using arrow keys scaled by speed and dt
@@ -23,5 +23,5 @@ void Player::update(float dt) {
 
 // TODO: Replace this with a sprite and animations
 void Player::draw() {
-	DrawCircleV(getPos(), 20, BLACK);
+	DrawCircleV(getPos() + raylib::Vector2(10, 10), 20, BLACK);
 }

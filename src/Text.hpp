@@ -1,9 +1,9 @@
 #pragma once
 
-#include "GameEntity.hpp"
+#include "GameObject.hpp"
 
 // A simple text class that represents some text rendered to the screen
-class Text : public GameEntity {
+class Text : public GameObject {
 private:
 	std::string text;
 	int size;

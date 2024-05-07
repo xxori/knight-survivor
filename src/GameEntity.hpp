@@ -1,23 +1,16 @@
 #pragma once
 
-#include "raylib-cpp.hpp" // IWYU pragma: keep
+#include "GameObject.hpp"
 
-// Forward declaration of Game class
-// Our GameEntity stores a pointer to it but we dont want circular includes
-class Game;
-
-// Class representing every entity that exists in our game
-class GameEntity {
+class GameEntity : public GameObject {
 private:
-	// Store a position and a reference to the global game object
-	raylib::Vector2 pos;
-	Game* game;
+	raylib::Texture* texture;
+	raylib::Rectangle localCollider;
 
 public:
-	GameEntity(Game* game);
-	virtual void update(float dt);
-	virtual void draw();
-	raylib::Vector2 getPos();
-	void setPos(raylib::Vector2 pos);
-	Game* getGame();
+	GameEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture);
+	raylib::Rectangle getCollider();
+	void setCollider(raylib::Rectangle collider);
+	bool collide(GameEntity* other);
+	virtual void draw() = 0;
 };

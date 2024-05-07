@@ -3,7 +3,7 @@
 // Default contructor for empty string
 Text::Text(Game* game) : Text(game, "", raylib::Vector2(0, 0), 20, WHITE) {}
 
-Text::Text(Game* game, std::string text, raylib::Vector2 pos, int size, raylib::Color color) : GameEntity(game), text(text), size(size), color(color) {
+Text::Text(Game* game, std::string text, raylib::Vector2 pos, int size, raylib::Color color) : GameObject(game, pos), text(text), size(size), color(color) {
 	this->setPos(pos);
 }
 
