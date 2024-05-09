@@ -10,12 +10,12 @@ void Background::draw() {
 
 	// Camera is rendered relative to player, with a half screen size offset
 	// We want to move the tiles as the player moves too, so we add a mod size offset
-	int startX = -playerPos.x + static_cast<int>(playerPos.x) % size + SCREEN_HEIGHT / 2.0;
-	int startY = -playerPos.y + static_cast<int>(playerPos.y) % size + SCREEN_WIDTH / 2.0;
+	int startX = -playerPos.x + static_cast<int>(playerPos.x) % size + SCREEN_WIDTH / 2.0;
+	int startY = -playerPos.y + static_cast<int>(playerPos.y) % size + SCREEN_HEIGHT / 2.0;
 
 	// Loop from one square left of the screen to one square right of the screen
-	for (int x = -size; x < SCREEN_HEIGHT + size; x += size) {
-		for (int y = -size; y < SCREEN_WIDTH + size; y += size) {
+	for (int x = -size; x < SCREEN_WIDTH + size; x += size) {
+		for (int y = -size; y < SCREEN_HEIGHT + size; y += size) {
 			// Apply offeet to the player screen location
 			int newX = x - startX;
 			int newY = y - startY;
