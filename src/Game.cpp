@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "Background.hpp"
 #include "FPSCounter.hpp"
+#include "Button.hpp"
 #include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
@@ -8,6 +9,7 @@
 Game::Game() : enemies(), projectiles(), uiObjects() {
 	addEnemy(new Background(this, 25));
 	addUIObject(new FPSCounter(this));
+	addUIObject(new Button(this, raylib::Vector2(10, 35), 50, 50, RED));
 	player = new Player(this);
 }
 

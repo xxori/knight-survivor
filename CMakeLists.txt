@@ -29,7 +29,7 @@ if (NOT raylib_cpp_FOUND)
 endif()
 
 # This is the main part:
-set(SOURCES src/main.cpp src/Game.cpp src/GameEntity.cpp src/GameObject.cpp src/Text.cpp src/FPSCounter.cpp src/Background.cpp src/Player.cpp src/Projectile.cpp src/Weapon.cpp src/Fireball.cpp src/FireStaff.cpp)
+set(SOURCES src/main.cpp src/Game.cpp src/GameEntity.cpp src/GameObject.cpp src/Text.cpp src/FPSCounter.cpp src/Background.cpp src/Player.cpp src/Projectile.cpp src/Weapon.cpp src/Fireball.cpp src/FireStaff.cpp src/Button.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)
