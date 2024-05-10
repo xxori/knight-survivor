@@ -9,7 +9,7 @@
 Game::Game() : enemies(), projectiles(), uiObjects() {
 	addEnemy(new Background(this, 25));
 	addUIObject(new FPSCounter(this));
-	addUIObject(new Button(this, raylib::Vector2(10, 35), 50, 50, RED));
+	addUIObject(new Button(this, raylib::Vector2(10, 35), 50, 100, RED, "Hello", 10, 25, WHITE));
 	player = new Player(this);
 }
 
