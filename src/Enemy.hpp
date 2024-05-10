@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameEntity.hpp"
+#include "Vector2.hpp"
 
 class Enemy : public GameEntity {
 private:
@@ -10,9 +11,10 @@ private:
 	float timeToDamage;
 	float damageCooldown;
 	float speed;
+	static raylib::Vector2 generateSpawnPosition();
 
 public:
-	Enemy(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed);
+	Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed);
 	void takeDamage(int damage);
 	int getHealth();
 	int getDamage();

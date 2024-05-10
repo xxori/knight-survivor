@@ -3,6 +3,7 @@
 #include "Button.hpp"
 #include "FPSCounter.hpp"
 #include "Goblin.hpp"
+#include "Vector2.hpp"
 #include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
@@ -11,7 +12,6 @@ Game::Game() : enemies(), projectiles(), uiObjects() {
 	addEnemy(new Background(this, 25));
 	addUIObject(new FPSCounter(this));
 	addUIObject(new Button(this, raylib::Vector2(10, 35), 50, 50, RED));
-	addEnemy(new Goblin(this, raylib::Vector2(100, 100), raylib::Rectangle { 0, 0, 10, 10 }, nullptr, 10, 1, 1, 80));
 	player = new Player(this);
 }
 
@@ -33,6 +33,13 @@ Game::~Game() {
 // TODO: Consider precedence of ticking i.e. should monsters be ticked before player, etc
 void Game::updateAll() {
 	float dt = GetFrameTime();
+
+	Goblin::timeToSpawn -= dt;
+	if (Goblin::timeToSpawn <= 0) {
+		addEnemy(new Goblin(this));
+		Goblin::timeToSpawn = Goblin::spawnCooldown;
+	}
+
 	player->update(dt);
 	for (auto entity : enemies) {
 		entity->update(dt);
