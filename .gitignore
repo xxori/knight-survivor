@@ -35,3 +35,6 @@ build/
 .cache/
 .direnv/
 .vscode/
+
+# MacOS
+.DS_Store
