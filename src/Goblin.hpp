@@ -4,7 +4,7 @@
 
 class Goblin : public Enemy {
 private:
-	const static int health;
+	const static int maxHealth;
 	const static int damage;
 	const static float damageCooldown;
 	const static float speed;
