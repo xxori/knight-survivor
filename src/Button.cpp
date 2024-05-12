@@ -9,7 +9,6 @@ void Button::update(float dt) {
 	int width = MeasureText(text.c_str(), fontSize);
 
 	if (mousePos.x >= this->getPos().x && mousePos.y >= this->getPos().y && mousePos.x <= this->getPos().x + width + 2 * margin && mousePos.y <= this->getPos().y + fontSize + 2 * margin) { // if mouseclick inside button area
-																																																																																													 // do something
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			// If clicked
 			this->setText("Clicked");
