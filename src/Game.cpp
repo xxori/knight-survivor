@@ -9,7 +9,9 @@
 Game::Game() : enemies(), projectiles(), uiObjects() {
 	addEnemy(new Background(this, 25));
 	addUIObject(new FPSCounter(this));
-	addUIObject(new Button(this, raylib::Vector2(10, 35), 50, 100, RED, "Hello", 10, 25, WHITE));
+	addUIObject(new Button(this, raylib::Vector2(10, 35), RED, "Hello", 10, 25, WHITE));
+	addUIObject(new Button(this, raylib::Vector2(10, 85), RED, "testing auto button spacing", 20, 10, WHITE));
+	addUIObject(new Button(this, raylib::Vector2(10, 145), RED, "a", 5, 50, WHITE));
 	player = new Player(this);
 }
 
