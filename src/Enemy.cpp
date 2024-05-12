@@ -3,19 +3,14 @@
 #include "Vector2.hpp"
 
 raylib::Vector2 Enemy::generateSpawnPosition() {
-	int spawnLimit { 100 };
-	int spawnX;
-	do {
-		spawnX = GetRandomValue(-SCREEN_WIDTH / 2, SCREEN_WIDTH / 2);
-	} while (-spawnLimit < spawnX && spawnX < spawnLimit);
-	int spawnY;
-	do {
-		spawnY = GetRandomValue(-SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2);
-	} while (-spawnLimit < spawnY && spawnY < spawnLimit);
-	return raylib::Vector2(spawnX, spawnY);
+	double angle = GetRandomValue(0, 360) * PI / 180.0;
+	raylib::Vector2 dir = raylib::Vector2(SCREEN_WIDTH * cos(angle), SCREEN_WIDTH * sin(angle));
+	return this->getGame()->getPlayer()->getPos() + dir;
 }
 
-Enemy::Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed) : GameEntity(game, generateSpawnPosition(), collider, texture), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed) {}
+Enemy::Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed) : GameEntity(game, raylib::Vector2(0, 0), collider, texture), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed) {
+	this->setPos(this->generateSpawnPosition());
+}
 
 void Enemy::takeDamage(int damage) {
 	if (timeToDamage <= 0) {

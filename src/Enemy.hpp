@@ -11,7 +11,7 @@ private:
 	float timeToDamage;
 	float damageCooldown;
 	float speed;
-	static raylib::Vector2 generateSpawnPosition();
+	raylib::Vector2 generateSpawnPosition();
 
 public:
 	Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed);

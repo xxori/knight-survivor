@@ -18,6 +18,7 @@ public:
 	void update(float dt) override;
 	void draw() override;
 
+	static void spawn(Game* game, float dt);
 	static float timeToSpawn;
 	const static float spawnCooldown;
 };

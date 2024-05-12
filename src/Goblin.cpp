@@ -1,4 +1,5 @@
 #include "Goblin.hpp"
+#include "Game.hpp"
 #include "Rectangle.hpp"
 #include <raylib.h>
 
@@ -12,6 +13,14 @@ const raylib::Rectangle Goblin::collider { -placeholderRadius, -placeholderRadiu
 raylib::Texture* Goblin::texture { nullptr };
 
 Goblin::Goblin(Game* game) : Enemy(game, collider, texture, maxHealth, damage, damageCooldown, speed) {}
+
+void Goblin::spawn(Game* game, float dt) {
+	Goblin::timeToSpawn -= dt;
+	if (Goblin::timeToSpawn <= 0) {
+		game->addEnemy(new Goblin(game));
+		Goblin::timeToSpawn = Goblin::spawnCooldown;
+	}
+}
 
 void Goblin::update(float dt) {
 	Enemy::update(dt);

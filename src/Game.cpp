@@ -34,11 +34,7 @@ Game::~Game() {
 void Game::updateAll() {
 	float dt = GetFrameTime();
 
-	Goblin::timeToSpawn -= dt;
-	if (Goblin::timeToSpawn <= 0) {
-		addEnemy(new Goblin(this));
-		Goblin::timeToSpawn = Goblin::spawnCooldown;
-	}
+	Goblin::spawn(this, dt);
 
 	player->update(dt);
 	for (auto entity : enemies) {
