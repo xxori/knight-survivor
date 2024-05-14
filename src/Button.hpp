@@ -4,23 +4,27 @@
 
 class Button : public GameObject {
 private:
-    // maybe just store a text object in here?
-    //std::string text;
-    //int fontSize;
-    raylib::Color color;
-    int height;
-    int width;
-public:
-    Button(Game* game);
-    Button(Game* game, raylib::Vector2 pos, int height, int width, raylib::Color color);
-    
-    void update(float dt);
-	void draw();
+	std::string text;
+	int margin;
+	int fontSize;
+	raylib::Color fontColor;
+	raylib::Color color;
 
-    raylib::Color getColor();
-    void setColor(raylib::Color color);
-    int getHeight();
-    void setHeight(int height);
-    int getWidth();
-    void setWidth(int width);
+public:
+	Button(Game* game);
+	Button(Game* game, raylib::Vector2 pos, raylib::Color color, std::string text, int margin, int fontSize, raylib::Color fontColor);
+
+	void update(float dt) override;
+	void draw() override;
+
+	raylib::Color getColor();
+	void setColor(raylib::Color color);
+	void setText(std::string text);
+	std::string getText();
+	void setMargin(int margin);
+	int getMargin();
+	void setFontSize(int fontSize);
+	int getFontSize();
+	void setFontColor(raylib::Color color);
+	raylib::Color getFontColor();
 };
