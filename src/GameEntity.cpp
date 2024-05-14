@@ -18,7 +18,13 @@ raylib::Rectangle GameEntity::getCollider() {
 }
 
 bool GameEntity::collide(GameEntity* other) {
+	if (other == NULL)
+		return false;
 	raylib::Rectangle me = getCollider();
 	raylib::Rectangle them = other->getCollider();
 	return me.CheckCollision(them);
+}
+
+raylib::Vector2 GameEntity::getCenter() {
+	return raylib::Vector2(getPos().x + getCollider().width / 2, getPos().y + getCollider().height / 2);
 }

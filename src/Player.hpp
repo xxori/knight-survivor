@@ -11,6 +11,8 @@ private:
 	float speed;
 	int health;
 	std::vector<Weapon*> weapons;
+	float timeToDamage;
+	float invincibility;
 
 public:
 	Player(Game* game);

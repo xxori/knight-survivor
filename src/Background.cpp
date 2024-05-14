@@ -14,8 +14,8 @@ void Background::draw() {
 	int startY = -playerPos.y + static_cast<int>(playerPos.y) % size + SCREEN_HEIGHT / 2.0;
 
 	// Loop from one square left of the screen to one square right of the screen
-	for (int x = -size; x < SCREEN_WIDTH + size; x += size) {
-		for (int y = -size; y < SCREEN_HEIGHT + size; y += size) {
+	for (int x = -size; x <= SCREEN_WIDTH + size; x += size) {
+		for (int y = -size; y <= SCREEN_HEIGHT + size; y += size) {
 			// Apply offeet to the player screen location
 			int newX = x - startX;
 			int newY = y - startY;

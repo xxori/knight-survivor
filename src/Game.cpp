@@ -1,28 +1,25 @@
 #include "Game.hpp"
 #include "Background.hpp"
-#include "Button.hpp"
+#include "Enemy.hpp"
 #include "FPSCounter.hpp"
 #include "Goblin.hpp"
-#include "Vector2.hpp"
 #include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
-Game::Game() : enemies(), projectiles(), uiObjects() {
-	addEnemy(new Background(this, 25));
+Game::Game() : enemies(), objects(), uiObjects() {
+	background = new Background(this, 25);
 	addUIObject(new FPSCounter(this));
-	addUIObject(new Button(this, raylib::Vector2(10, 35), RED, "Hello", 10, 25, WHITE));
-	addUIObject(new Button(this, raylib::Vector2(10, 85), RED, "testing auto button spacing", 20, 10, WHITE));
-	addUIObject(new Button(this, raylib::Vector2(10, 145), RED, "a", 5, 50, WHITE));
 	player = new Player(this);
 }
 
 // Dealloc all game entities
 Game::~Game() {
+	delete background;
 	for (auto entity : enemies) {
 		delete entity;
 	}
-	for (auto entity : projectiles) {
+	for (auto entity : objects) {
 		delete entity;
 	}
 	for (auto uentity : uiObjects) {
@@ -40,14 +37,24 @@ void Game::updateAll() {
 
 	player->update(dt);
 	for (auto entity : enemies) {
-		entity->update(dt);
+		if (entity != NULL)
+			entity->update(dt);
 	}
-	for (auto entity : projectiles) {
-		entity->update(dt);
+	enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* i) { return i == NULL; }), enemies.end());
+	for (auto entity : objects) {
+		if (entity != NULL) {
+			entity->update(dt);
+		}
 	}
+	objects.erase(std::remove_if(objects.begin(), objects.end(), [](GameObject* i) { return i == NULL; }), objects.end());
 	for (auto uEntity : uiObjects) {
-		uEntity->update(dt);
+		if (uEntity != NULL)
+			uEntity->update(dt);
 	}
+}
+
+std::vector<Enemy*> Game::getEnemies() {
+	return enemies;
 }
 
 // Draw all elements, in order of first added drawn on bottom
@@ -57,16 +64,20 @@ void Game::drawAll(raylib::Camera2D camera) {
 	BeginDrawing();
 	ClearBackground(WHITE);
 	BeginMode2D(camera);
+	background->draw();
 	for (auto entity : enemies) {
-		entity->draw();
+		if (entity != NULL)
+			entity->draw();
 	}
 	player->draw();
-	for (auto entity : projectiles) {
-		entity->draw();
+	for (auto entity : objects) {
+		if (entity != NULL)
+			entity->draw();
 	}
 	EndMode2D();
 	for (auto uentity : uiObjects) {
-		uentity->draw();
+		if (uentity != NULL)
+			uentity->draw();
 	}
 
 	// Uncomment to show middle of screen
@@ -78,28 +89,34 @@ void Game::drawAll(raylib::Camera2D camera) {
 
 Player* Game::getPlayer() { return player; }
 
-void Game::addEnemy(GameObject* obj) {
+void Game::addEnemy(Enemy* obj) {
 	enemies.push_back(obj);
 }
 
-void Game::removeEnemy(GameObject* obj) {
-	for (int i = 0; i < enemies.size(); i++)
-		if (enemies[i] == obj)
-			enemies.erase(enemies.begin() + i);
-	delete obj;
-	return;
+void Game::removeEnemy(Enemy* obj) {
+	auto it = std::find(enemies.begin(), enemies.end(), obj);
+	if (it != enemies.end()) {
+		if (obj != NULL) {
+			delete obj;
+			obj = nullptr;
+		}
+		*it = nullptr;
+	}
 }
 
-void Game::addProjectile(Projectile* obj) {
-	projectiles.push_back(obj);
+void Game::addObject(GameObject* obj) {
+	objects.push_back(obj);
 }
 
-void Game::removeProjectile(Projectile* obj) {
-	for (int i = 0; i < projectiles.size(); i++)
-		if (projectiles[i] == obj)
-			projectiles.erase(projectiles.begin() + i);
-	delete obj;
-	return;
+void Game::removeObject(GameObject* obj) {
+	auto it = std::find(objects.begin(), objects.end(), obj);
+	if (it != objects.end()) {
+		if (obj != NULL) {
+			delete obj;
+			obj = nullptr;
+		}
+		*it = nullptr;
+	}
 }
 
 void Game::addUIObject(GameObject* obj) {
