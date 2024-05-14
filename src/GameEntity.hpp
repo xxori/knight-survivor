@@ -13,4 +13,5 @@ public:
 	raylib::Rectangle getCollider();
 	void setCollider(raylib::Rectangle collider);
 	bool collide(GameEntity* other);
+	raylib::Vector2 getCenter();
 };

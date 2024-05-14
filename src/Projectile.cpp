@@ -1,4 +1,5 @@
 #include "Projectile.hpp"
+#include "Game.hpp"
 #include "GameEntity.hpp"
 
 void Projectile::setSpeed(float speed) { this->speed = speed; }
@@ -13,4 +14,8 @@ Projectile::Projectile(Game* game, raylib::Vector2 pos, raylib::Rectangle collid
 void Projectile::update(float dt) {
 	// TODO:
 	// Check collissions with all the enemies to damage them
+	for (auto enemy : getGame()->getEnemies()) {
+		if (enemy != NULL && enemy->collide(this))
+			enemy->takeDamage(damage);
+	}
 }

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Enemy.hpp"
 #include "GameObject.hpp"
 #include "Player.hpp"
-#include "Projectile.hpp"
 #include "raylib-cpp.hpp" // IWYU pragma: keep
 #include <vector>
 
@@ -16,8 +16,9 @@ private:
 	Player* player;
 
 	// All game entities that are rendered relative to player using relative map coordinates
-	std::vector<GameObject*> enemies;
-	std::vector<Projectile*> projectiles;
+	std::vector<Enemy*> enemies;
+	std::vector<GameObject*> objects; // Other objects including projectiles
+	GameObject* background;
 
 	// All UI elements that are rendered using absolute coordinates on the screen
 	// TODO: Maybe make this a different class than GameEntity?
@@ -29,11 +30,13 @@ public:
 
 	void updateAll();
 	void drawAll(raylib::Camera2D camera);
-	void addEnemy(GameObject* entity);
-	void removeEnemy(GameObject* entity);
-	void addProjectile(Projectile* entity);
-	void removeProjectile(Projectile* entity);
+	void addEnemy(Enemy* entity);
+	void removeEnemy(Enemy* entity);
+	void addObject(GameObject* obj);
+	void removeObject(GameObject* obj);
 	void addUIObject(GameObject* entity);
+
+	std::vector<Enemy*> getEnemies();
 
 	// Get a reference to the player object
 	Player* getPlayer();

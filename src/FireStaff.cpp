@@ -8,6 +8,6 @@ void FireStaff::update(float dt) {
 	setTimeToFire(getTimeToFire() - dt);
 	if (getTimeToFire() <= 0) {
 		setTimeToFire(getFireSpeed());
-		getGame()->addProjectile(new Fireball(getGame(), 0.005, 100));
+		getGame()->addObject(new Fireball(getGame(), 100, 5));
 	}
 }

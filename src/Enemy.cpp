@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "DamageText.hpp"
 #include "Game.hpp"
 #include "Vector2.hpp"
 
@@ -14,19 +15,36 @@ Enemy::Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, i
 
 void Enemy::takeDamage(int damage) {
 	if (timeToDamage <= 0) {
+		getGame()->addObject(new DamageText(getGame(), damage, getPos() + raylib::Vector2(getCollider().width, 0)));
 		health -= damage;
 		timeToDamage = damageCooldown;
-	}
-	if (health <= 0) {
-		getGame()->removeEnemy(this);
+		if (health <= 0) {
+			getGame()->removeEnemy(this);
+			// TODO: further processing i.e. leveling up player, etc..
+		}
 	}
 }
 void Enemy::update(float dt) {
 	timeToDamage -= dt;
-	raylib::Vector2 playerPos { getGame()->getPlayer()->getPos() };
+	Player* player = getGame()->getPlayer();
+	raylib::Vector2 playerPos { player->getCenter() };
 	raylib::Vector2 direction { (playerPos - getPos()).Normalize() * speed * dt };
 	setPos(getPos() + direction);
+
+	for (auto enemy : getGame()->getEnemies()) {
+		if (enemy != NULL && enemy->collide(this)) {
+			raylib::Vector2 dir = this->getCenter() - enemy->getCenter();
+			setPos(getPos() + dir.Normalize() * dt * speed);
+			// enemy->setPos(enemy->getPos() - dir * dt * 2.0);
+		}
+	}
+	if (player->collide(this)) {
+		player->takeDamage(damage);
+		raylib::Vector2 dir = this->getCenter() - player->getCenter();
+		setPos(getPos() + dir.Normalize() * dt * speed * 2.0);
+	}
 }
+
 int Enemy::getHealth() {
 	return health;
 }
