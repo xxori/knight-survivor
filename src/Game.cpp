@@ -5,6 +5,7 @@
 #include "FPSCounter.hpp"
 #include "Goblin.hpp"
 #include <raylib-cpp.hpp>
+#include <algorithm>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class

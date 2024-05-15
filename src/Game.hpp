@@ -10,9 +10,10 @@ const int SCREEN_HEIGHT = 450;
 const int SCREEN_WIDTH = 800;
 
 enum GameState { Playing,
-								 MainMenu,
-								 Paused,
-								 Dead };
+	MainMenu,
+	Paused,
+	Dead
+};
 
 // Overall game state object, holding all other objects
 class Game {
