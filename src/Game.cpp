@@ -51,8 +51,6 @@ Game::~Game() {
 void Game::updateAll() {
 	float dt = GetFrameTime();
 
-	Goblin::spawn(this, dt);
-
 	switch (state) {
 		case MainMenu:
 			for (auto uiEntity : mainMenu) {
@@ -73,6 +71,7 @@ void Game::updateAll() {
 			break;
 
 		case Playing:
+			Goblin::spawn(this, dt);
 			player->update(dt);
 			for (auto entity : enemies) {
 				if (entity != NULL)
