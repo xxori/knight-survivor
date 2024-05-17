@@ -39,14 +39,15 @@ void Game::updateAll() {
 	for (auto enemy : enemies) {
 		enemy->update(dt);
 	}
-	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
 	for (auto object : objects) {
 		object->update(dt);
 	}
-	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 	for (auto uEntity : uiObjects) {
 		uEntity->update(dt);
 	}
+
+	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
+	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 }
 
 std::vector<Enemy*> Game::getEnemies() {

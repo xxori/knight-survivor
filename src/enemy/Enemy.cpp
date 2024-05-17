@@ -14,7 +14,7 @@ Enemy::Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, i
 }
 
 void Enemy::takeDamage(int damage) {
-	if (timeToDamage <= 0 || colliding != lastCollided) {
+	if (timeToDamage <= 0) {
 		getGame()->addObject(new DamageText(getGame(), damage, getPos() + raylib::Vector2(getCollider().width, 0)));
 		health -= damage;
 		timeToDamage = damageCooldown;
