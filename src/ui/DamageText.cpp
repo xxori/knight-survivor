@@ -1,5 +1,5 @@
 #include "DamageText.hpp"
-#include "Game.hpp"
+#include "../Game.hpp"
 #include <string>
 
 DamageText::DamageText(Game* game, int damage, raylib::Vector2 pos) : DamageText(game, damage, pos, 3.0) {}

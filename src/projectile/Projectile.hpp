@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameEntity.hpp"
+#include "../common/GameEntity.hpp"
 
 class Projectile : public GameEntity {
 private:

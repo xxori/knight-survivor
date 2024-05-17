@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.hpp"
+#include "common/GameObject.hpp"
 
 // Background texture class
 // For now, it prints a moving infinite checkerboard

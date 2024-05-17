@@ -1,11 +1,11 @@
 #include "Game.hpp"
 #include "Background.hpp"
-#include "Button.hpp"
-#include "Enemy.hpp"
-#include "FPSCounter.hpp"
-#include "Goblin.hpp"
-#include <raylib-cpp.hpp>
+#include "enemy/Enemy.hpp"
+#include "enemy/Goblin.hpp"
+#include "ui/Button.hpp"
+#include "ui/FPSCounter.hpp"
 #include <algorithm>
+#include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class

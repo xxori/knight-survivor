@@ -1,6 +1,6 @@
 #include "FireStaff.hpp"
-#include "Fireball.hpp"
-#include "Game.hpp"
+#include "../Game.hpp"
+#include "../projectile/Fireball.hpp"
 
 FireStaff::FireStaff(Game* game, float fireSpeed) : Weapon(game, "Fire Staff", fireSpeed) {}
 

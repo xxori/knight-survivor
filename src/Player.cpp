@@ -1,5 +1,5 @@
 #include "Player.hpp"
-#include "FireStaff.hpp"
+#include "weapon/FireStaff.hpp"
 #include <iostream>
 #include <raylib-cpp.hpp>
 

@@ -29,7 +29,8 @@ if (NOT raylib_cpp_FOUND)
 endif()
 
 # This is the main part:
-set(SOURCES src/main.cpp src/Game.cpp src/GameEntity.cpp src/GameObject.cpp src/Text.cpp src/FPSCounter.cpp src/Background.cpp src/Player.cpp src/Projectile.cpp src/Weapon.cpp src/Fireball.cpp src/FireStaff.cpp src/Button.cpp src/Enemy.cpp src/Goblin.cpp src/DamageText.cpp)
+# Collect all .cpp files in the src/ directory and its subdirectories
+file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)

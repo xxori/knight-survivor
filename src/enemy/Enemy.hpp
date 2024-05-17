@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameEntity.hpp"
+#include "../common/GameEntity.hpp"
 #include "Vector2.hpp"
 
 class Enemy : public GameEntity {

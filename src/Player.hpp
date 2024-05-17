@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GameEntity.hpp"
-#include "Weapon.hpp"
+#include "common/GameEntity.hpp"
+#include "weapon/Weapon.hpp"
 #include <vector>
 
 // The player entity is controlled by the player and is responsible for

@@ -1,5 +1,5 @@
 #include "GameEntity.hpp"
-#include "Game.hpp"
+#include "../Game.hpp"
 #include "Rectangle.hpp"
 #include "Vector2.hpp"
 
