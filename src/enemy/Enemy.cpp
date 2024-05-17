@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
-#include "DamageText.hpp"
-#include "Game.hpp"
+#include "../Game.hpp"
+#include "../ui/DamageText.hpp"
 #include "Vector2.hpp"
 
 raylib::Vector2 Enemy::generateSpawnPosition() {

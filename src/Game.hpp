@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Enemy.hpp"
-#include "GameObject.hpp"
 #include "Player.hpp"
+#include "common/GameObject.hpp"
+#include "enemy/Enemy.hpp"
 #include "raylib-cpp.hpp" // IWYU pragma: keep
 #include <vector>
 

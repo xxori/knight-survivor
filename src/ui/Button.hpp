@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.hpp"
+#include "../common/GameObject.hpp"
 
 class Button : public GameObject {
 private:

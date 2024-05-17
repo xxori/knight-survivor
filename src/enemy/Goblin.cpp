@@ -1,5 +1,5 @@
 #include "Goblin.hpp"
-#include "Game.hpp"
+#include "../Game.hpp"
 #include "Rectangle.hpp"
 #include <raylib.h>
 

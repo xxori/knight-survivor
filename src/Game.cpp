@@ -1,8 +1,8 @@
 #include "Game.hpp"
 #include "Background.hpp"
-#include "Enemy.hpp"
-#include "FPSCounter.hpp"
-#include "Goblin.hpp"
+#include "enemy/Enemy.hpp"
+#include "enemy/Goblin.hpp"
+#include "ui/FPSCounter.hpp"
 #include <raylib-cpp.hpp>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
