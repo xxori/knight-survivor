@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.hpp"
+#include "../common/GameObject.hpp"
 
 // A simple text class that represents some text rendered to the screen
 class Text : public GameObject {

@@ -1,6 +1,6 @@
 #include "Projectile.hpp"
-#include "Game.hpp"
-#include "GameEntity.hpp"
+#include "../Game.hpp"
+#include "../common/GameEntity.hpp"
 
 void Projectile::setSpeed(float speed) { this->speed = speed; }
 float Projectile::getSpeed() { return speed; }
