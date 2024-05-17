@@ -11,6 +11,8 @@ private:
 	float timeToDamage;
 	float damageCooldown;
 	float speed;
+	GameEntity* colliding;
+	GameEntity* lastCollided;
 	raylib::Vector2 generateSpawnPosition();
 
 public:

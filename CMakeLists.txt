@@ -3,6 +3,9 @@ project(game)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
+
 # raylib
 find_package(raylib QUIET)
 if (NOT raylib_FOUND)
