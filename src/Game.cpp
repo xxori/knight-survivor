@@ -39,15 +39,14 @@ void Game::updateAll() {
 	for (auto enemy : enemies) {
 		enemy->update(dt);
 	}
+	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
 	for (auto object : objects) {
 		object->update(dt);
 	}
+	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 	for (auto uEntity : uiObjects) {
 		uEntity->update(dt);
 	}
-
-	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
-	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 }
 
 std::vector<Enemy*> Game::getEnemies() {
@@ -91,7 +90,7 @@ void Game::addEnemy(Enemy* obj) {
 void Game::removeEnemy(Enemy* obj) {
 	auto it = std::find(enemies.begin(), enemies.end(), obj);
 	if (it != enemies.end()) {
-		delete obj;
+		delete *it;
 		*it = nullptr;
 	}
 }
@@ -103,7 +102,7 @@ void Game::addObject(GameObject* obj) {
 void Game::removeObject(GameObject* obj) {
 	auto it = std::find(objects.begin(), objects.end(), obj);
 	if (it != objects.end()) {
-		delete obj;
+		delete *it;
 		*it = nullptr;
 	}
 }
