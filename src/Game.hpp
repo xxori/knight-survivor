@@ -12,7 +12,8 @@ const int SCREEN_WIDTH = 800;
 enum GameState { Playing,
 	MainMenu,
 	Paused,
-	Dead
+	Dead,
+	Tutorial
 };
 
 // Overall game state object, holding all other objects
@@ -27,12 +28,12 @@ private:
 	GameObject* background;
 
 	// All UI elements that are rendered using absolute coordinates on the screen
-	// TODO: Maybe make this a different class than GameEntity?
 	std::vector<GameObject*> playingUI;
 
 	std::vector<GameObject*> mainMenu;
 	std::vector<GameObject*> pauseMenu;
 	std::vector<GameObject*> deadMenu;
+	std::vector<GameObject*> tutorialMenu;
 
 	GameState state;
 
@@ -48,8 +49,9 @@ public:
 	void removeObject(GameObject* obj);
 	void addUIObject(GameObject* entity);
 	void setState(GameState state);
-
 	std::vector<Enemy*> getEnemies();
+	void resetEnemy();
+	void resetObjects();
 
 	// Get a reference to the player object
 	Player* getPlayer();

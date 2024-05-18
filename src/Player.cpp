@@ -2,6 +2,7 @@
 #include "weapon/FireStaff.hpp"
 #include <iostream>
 #include <raylib-cpp.hpp>
+#include "Game.hpp"
 
 Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
 	weapons.push_back(new FireStaff(game, 5));
@@ -38,6 +39,14 @@ void Player::update(float dt) {
 	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
 		movement.x++;
 	}
+	// just to test death menu, remove later
+	if (IsKeyDown(KEY_P)) {
+		health = 0;
+	}
+	// pause
+	if (IsKeyDown(KEY_ESCAPE)) {
+		getGame()->setState(Paused);
+	}
 	raylib::Vector2 pos = getPos();
 	setPos(pos + movement.Normalize() * dt * speed);
 }
@@ -47,6 +56,9 @@ void Player::takeDamage(int damage) {
 		timeToDamage = invincibility;
 		// Check for deaths here
 		health -= damage;
+		if (health <= 0) {
+			getGame()->setState(Dead);
+		}
 		std::cout << "Player took " << damage << " damage leaving them with " << health << " health" << std::endl;
 	}
 }
@@ -56,4 +68,13 @@ void Player::draw() {
 	DrawCircleV(getPos() + raylib::Vector2(20, 20), 20, BLACK);
 	// Uncomment to show collider
 	// DrawRectangleLinesEx(getCollider(), 1, raylib::Color::Red());
+}
+
+void Player::resetHealth() {
+	health = 100;
+}
+
+void Player::resetWeapons(Game* game) {
+	weapons = {};
+	weapons.push_back(new FireStaff(game, 5));
 }

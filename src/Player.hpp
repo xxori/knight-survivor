@@ -20,4 +20,6 @@ public:
 	void update(float dt) override;
 	void draw() override;
 	void takeDamage(int damage);
+	void resetHealth();
+	void resetWeapons(Game* game);
 };
