@@ -4,6 +4,7 @@
 #include "enemy/Goblin.hpp"
 #include "ui/FPSCounter.hpp"
 #include <raylib-cpp.hpp>
+#include <sys/_types/_size_t.h>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
@@ -40,8 +41,8 @@ void Game::updateAll() {
 		enemy->update(dt);
 	}
 	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
-	for (auto object : objects) {
-		object->update(dt);
+	for (size_t i = 0; i < objects.size(); i++) {
+		objects[i]->update(dt);
 	}
 	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 	for (auto uEntity : uiObjects) {
