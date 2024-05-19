@@ -4,14 +4,13 @@
 
 class EntityTest {
 private:
-	Game* game;
 	GameEntity* entity1;
 	GameEntity* entity2;
 	void testCenter();
 	void testCollide();
 
 public:
-	EntityTest();
+	EntityTest(Game* game);
 	~EntityTest();
 	void runAllTests();
 };

@@ -8,15 +8,12 @@ public:
 	void draw() override {}
 };
 
-EntityTest::EntityTest() {
-	game = new Game();
+EntityTest::EntityTest(Game* game) {
 	entity1 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), nullptr);
 	entity2 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(6, 6, 10, 10), nullptr);
 }
 
 EntityTest::~EntityTest() {
-	delete game;
-	game = nullptr;
 	delete entity1;
 	entity1 = nullptr;
 	delete entity2;
