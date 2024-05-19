@@ -13,7 +13,8 @@ enum GameState { Playing,
 	MainMenu,
 	Paused,
 	Dead,
-	Tutorial
+	Tutorial,
+	Confirmation
 };
 
 // Overall game state object, holding all other objects
@@ -34,6 +35,7 @@ private:
 	std::vector<GameObject*> pauseMenu;
 	std::vector<GameObject*> deadMenu;
 	std::vector<GameObject*> tutorialMenu;
+	std::vector<GameObject*> confirmationMenu;
 
 	GameState state;
 

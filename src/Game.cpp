@@ -31,8 +31,13 @@ Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadM
 
 	// Pause menu items
 	pauseMenu.push_back(new Text(this, "Paused", raylib::Vector2(350, 100), 30, RED));
-	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(350, 250), RED, BLUE, "Back", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Confirmation); }, raylib::Vector2(450, 250), RED, BLUE, "Quit", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(270, 250), RED, BLUE, "Back", 12, 36, WHITE));
 
+	// Confirmation menu items
+	confirmationMenu.push_back(new Text(this, "Are you sure you want to quit?", raylib::Vector2(150, 100), 30, RED));
+	confirmationMenu.push_back(new Button(this, [](Game* game) { CloseWindow(); }, raylib::Vector2(420, 200), RED, BLUE, "YES", 12, 36, WHITE));
+	confirmationMenu.push_back(new Button(this, [](Game* game) { game->setState(Paused); }, raylib::Vector2(270, 200), RED, BLUE, "NO", 12, 36, WHITE));
 }
 
 void Game::setState(GameState state) {
@@ -96,6 +101,12 @@ void Game::updateAll() {
 			}
 			break;
 
+		case Confirmation:
+			for (auto uiEntity : confirmationMenu) {
+				uiEntity->update(dt);
+			}
+			break;
+
 		case Playing:
 			Goblin::spawn(this, dt);
 			player->update(dt);
@@ -151,6 +162,12 @@ void Game::drawAll(raylib::Camera2D camera) {
 
 		case Tutorial:
 			for (auto uiEntity : tutorialMenu) {
+				uiEntity->draw();
+			}
+			break;
+		
+		case Confirmation:
+			for (auto uiEntity : confirmationMenu) {
 				uiEntity->draw();
 			}
 			break;
