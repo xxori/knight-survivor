@@ -1,15 +1,15 @@
 #include "Player.hpp"
+#include "Game.hpp"
 #include "weapon/FireStaff.hpp"
 #include <iostream>
 #include <raylib-cpp.hpp>
-#include "Game.hpp"
 
 Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
 	weapons.push_back(new FireStaff(game, 5));
 	invincibility = 3.0;
 	timeToDamage = invincibility;
 
-	health = 100;
+	health = 5;
 }
 Player::~Player() {
 	for (auto weapon : weapons) {
@@ -43,10 +43,7 @@ void Player::update(float dt) {
 	if (IsKeyDown(KEY_P)) {
 		health = 0;
 	}
-	// pause
-	if (IsKeyDown(KEY_ESCAPE)) {
-		getGame()->setState(Paused);
-	}
+
 	raylib::Vector2 pos = getPos();
 	setPos(pos + movement.Normalize() * dt * speed);
 }
@@ -75,6 +72,9 @@ void Player::resetHealth() {
 }
 
 void Player::resetWeapons(Game* game) {
+	for (auto weapon : weapons) {
+		delete weapon;
+	}
 	weapons = {};
 	weapons.push_back(new FireStaff(game, 5));
 }

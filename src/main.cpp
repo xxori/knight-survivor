@@ -6,7 +6,7 @@ int main() {
 
 	// Use vsync instead of a capped FPS
 	SetConfigFlags(FLAG_VSYNC_HINT);
-	raylib::Window window(SCREEN_WIDTH, SCREEN_HEIGHT, "GAME");
+	raylib::Window window(SCREEN_WIDTH, SCREEN_HEIGHT, "Knight Survivors");
 
 	// SetTargetFPS(60);
 
@@ -21,7 +21,7 @@ int main() {
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f;
 
-	// Simple game loop, closes when press escape or x button
+	// Simple game loop, closes when press Q or x button
 	while (!window.ShouldClose()) {
 		game.updateAll();
 		camera.target = game.getPlayer()->getPos();

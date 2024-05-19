@@ -1,4 +1,6 @@
 #include "Button.hpp"
+#include "../Game.hpp"
+#include <raylib.h>
 
 Button::Button(Game* game) : Button(game, [](Game* game) {}, raylib::Vector2(0, 0), WHITE, WHITE, "", 0, 0, WHITE) {}
 
@@ -25,7 +27,8 @@ void Button::update(float dt) {
 void Button::draw() {
 	int width = MeasureText(text.c_str(), fontSize);
 	DrawRectangle(this->getPos().x, this->getPos().y, width + 2 * margin, fontSize + 2 * margin, color);
-	DrawText(text, this->getPos().x + margin, this->getPos().y + margin, fontSize, fontColor);
+	getGame()->getFont()->DrawText(text, this->getPos() + raylib::Vector2(margin, margin), fontSize, 0, fontColor);
+	// DrawText(text, this->getPos().x + margin, this->getPos().y + margin, fontSize, fontColor);
 	// get size of text
 }
 

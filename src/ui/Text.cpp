@@ -1,4 +1,5 @@
 #include "Text.hpp"
+#include "../Game.hpp"
 
 // Default contructor for empty string
 Text::Text(Game* game) : Text(game, "", raylib::Vector2(0, 0), 20, WHITE) {}
@@ -9,7 +10,8 @@ Text::Text(Game* game, std::string text, raylib::Vector2 pos, int size, raylib::
 
 // Render text at the given position
 void Text::draw() {
-	raylib::DrawText(text, this->getPos().x, this->getPos().y, size, color);
+	// raylib::DrawText(text, this->getPos().x, this->getPos().y, size, color);
+	getGame()->getFont()->DrawText(text, this->getPos(), size, 0, color);
 }
 
 // Standard getters and setters

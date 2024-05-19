@@ -10,11 +10,11 @@ const int SCREEN_HEIGHT = 450;
 const int SCREEN_WIDTH = 800;
 
 enum GameState { Playing,
-	MainMenu,
-	Paused,
-	Dead,
-	Tutorial,
-	Confirmation
+								 MainMenu,
+								 Paused,
+								 Dead,
+								 Tutorial,
+								 Confirmation
 };
 
 // Overall game state object, holding all other objects
@@ -39,6 +39,10 @@ private:
 
 	GameState state;
 
+	raylib::Font font;
+
+	bool escapePressedLastFrame;
+
 public:
 	Game();
 	~Game();
@@ -54,6 +58,8 @@ public:
 	std::vector<Enemy*> getEnemies();
 	void resetEnemy();
 	void resetObjects();
+
+	raylib::Font* getFont();
 
 	// Get a reference to the player object
 	Player* getPlayer();

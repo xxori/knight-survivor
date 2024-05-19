@@ -6,13 +6,16 @@
 #include "ui/FPSCounter.hpp"
 #include <algorithm>
 #include <raylib-cpp.hpp>
+#include <raylib.h>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
-Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadMenu(), state(MainMenu) {
+Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadMenu(), state(MainMenu), escapePressedLastFrame(false) {
 	background = new Background(this, 25);
 	addUIObject(new FPSCounter(this));
 	player = new Player(this);
+
+	font = raylib::Font("../res/Romulus.ttf", 64, 0, 350);
 
 	// Main menu items
 	mainMenu.push_back(new Text(this, "Knight Survivors", raylib::Vector2(175, 100), 50, RED));
@@ -30,9 +33,10 @@ Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadM
 	deadMenu.push_back(new Button(this, [](Game* game) { game->resetObjects(); game->getPlayer()->resetWeapons(game); game->getPlayer()->resetHealth(); game->resetEnemy(); game->setState(Playing); }, raylib::Vector2(310, 250), RED, BLUE, "Respawn", 12, 36, WHITE));
 
 	// Pause menu items
-	pauseMenu.push_back(new Text(this, "Paused", raylib::Vector2(350, 100), 30, RED));
+	pauseMenu.push_back(new Text(this, "Paused", raylib::Vector2(310, 100), 54, RED));
 	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Confirmation); }, raylib::Vector2(450, 250), RED, BLUE, "Quit", 12, 36, WHITE));
 	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(270, 250), RED, BLUE, "Back", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(MainMenu); }, raylib::Vector2(300, 350), RED, BLUE, "Main Menu", 12, 36, WHITE));
 
 	// Confirmation menu items
 	confirmationMenu.push_back(new Text(this, "Are you sure you want to quit?", raylib::Vector2(150, 100), 30, RED));
@@ -76,7 +80,8 @@ Game::~Game() {
 void Game::updateAll() {
 	float dt = GetFrameTime();
 
-	switch (state) {
+	GameState s = state;
+	switch (s) {
 		case MainMenu:
 			for (auto uiEntity : mainMenu) {
 				uiEntity->update(dt);
@@ -87,6 +92,7 @@ void Game::updateAll() {
 			for (auto uiEntity : pauseMenu) {
 				uiEntity->update(dt);
 			}
+			if (IsKeyDown(KEY_ESCAPE) && !escapePressedLastFrame) setState(Playing);
 			break;
 
 		case Dead:
@@ -99,12 +105,14 @@ void Game::updateAll() {
 			for (auto uiEntity : tutorialMenu) {
 				uiEntity->update(dt);
 			}
+			if (IsKeyDown(KEY_ESCAPE)) setState(MainMenu);
 			break;
 
 		case Confirmation:
 			for (auto uiEntity : confirmationMenu) {
 				uiEntity->update(dt);
 			}
+			if (IsKeyDown(KEY_ESCAPE) && !escapePressedLastFrame) setState(Paused);
 			break;
 
 		case Playing:
@@ -124,11 +132,11 @@ void Game::updateAll() {
 			for (auto uEntity : playingUI) {
 				uEntity->update(dt);
 			}
-			if (IsKeyDown(KEY_ESCAPE)) {
-				setState(Paused);
-			}
+			if (IsKeyDown(KEY_ESCAPE) && !escapePressedLastFrame) setState(Paused);
 			break;
 	}
+
+	escapePressedLastFrame = IsKeyDown(KEY_ESCAPE);
 }
 
 std::vector<Enemy*> Game::getEnemies() {
@@ -165,7 +173,7 @@ void Game::drawAll(raylib::Camera2D camera) {
 				uiEntity->draw();
 			}
 			break;
-		
+
 		case Confirmation:
 			for (auto uiEntity : confirmationMenu) {
 				uiEntity->draw();
@@ -219,6 +227,8 @@ void Game::addObject(GameObject* obj) {
 	objects.push_back(obj);
 }
 
+raylib::Font* Game::getFont() { return &font; }
+
 void Game::removeObject(GameObject* obj) {
 	auto it = std::find(objects.begin(), objects.end(), obj);
 	if (it != objects.end()) {
@@ -235,9 +245,15 @@ void Game::addUIObject(GameObject* obj) {
 }
 
 void Game::resetEnemy() {
+	for (auto enemy : enemies) {
+		delete enemy;
+	}
 	enemies = {};
 }
 
 void Game::resetObjects() {
+	for (auto obj : objects) {
+		delete obj;
+	}
 	objects = {};
 }
