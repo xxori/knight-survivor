@@ -4,7 +4,6 @@
 #include "enemy/Goblin.hpp"
 #include "ui/FPSCounter.hpp"
 #include <raylib-cpp.hpp>
-#include <sys/_types/_size_t.h>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
@@ -37,9 +36,8 @@ void Game::updateAll() {
 	Goblin::spawn(this, dt);
 
 	player->update(dt);
-	for (auto enemy : enemies) {
+	for (auto enemy : enemies)
 		enemy->update(dt);
-	}
 	enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
 	for (size_t i = 0; i < objects.size(); i++) {
 		objects[i]->update(dt);
@@ -63,12 +61,13 @@ void Game::drawAll(raylib::Camera2D camera) {
 	BeginMode2D(camera);
 	background->draw();
 	for (auto entity : enemies) {
-		if (entity != nullptr)
+		if (entity)
 			entity->draw();
 	}
 	player->draw();
 	for (auto entity : objects) {
-		entity->draw();
+		if (entity)
+			entity->draw();
 	}
 	EndMode2D();
 	for (auto uentity : uiObjects) {
@@ -91,9 +90,9 @@ void Game::addEnemy(Enemy* obj) {
 void Game::removeEnemy(Enemy* obj) {
 	auto it = std::find(enemies.begin(), enemies.end(), obj);
 	if (it != enemies.end()) {
-		delete *it;
 		*it = nullptr;
 	}
+	delete obj;
 }
 
 void Game::addObject(GameObject* obj) {
@@ -103,9 +102,9 @@ void Game::addObject(GameObject* obj) {
 void Game::removeObject(GameObject* obj) {
 	auto it = std::find(objects.begin(), objects.end(), obj);
 	if (it != objects.end()) {
-		delete *it;
 		*it = nullptr;
 	}
+	delete obj;
 }
 
 void Game::addUIObject(GameObject* obj) {
