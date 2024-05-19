@@ -13,6 +13,7 @@ private:
 	std::vector<Weapon*> weapons;
 	float timeToDamage;
 	float invincibility;
+	raylib::Vector2 direction;
 
 public:
 	Player(Game* game);
@@ -20,4 +21,7 @@ public:
 	void update(float dt) override;
 	void draw() override;
 	void takeDamage(int damage);
+
+	void setDirection(raylib::Vector2 direction);
+	raylib::Vector2 getDirection();
 };

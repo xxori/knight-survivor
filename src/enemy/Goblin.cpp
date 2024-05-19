@@ -7,7 +7,7 @@ const int Goblin::placeholderRadius = 15;
 
 const int Goblin::maxHealth { 10 };
 const int Goblin::damage { 1 };
-const float Goblin::damageCooldown { 1 };
+const float Goblin::damageCooldown { 0.3 };
 const float Goblin::speed { 80 };
 const raylib::Rectangle Goblin::collider { -placeholderRadius, -placeholderRadius, placeholderRadius * 2, placeholderRadius * 2 };
 raylib::Texture* Goblin::texture { nullptr };
