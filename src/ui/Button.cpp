@@ -1,8 +1,10 @@
 #include "Button.hpp"
+#include "../Game.hpp"
+#include <raylib.h>
 
-Button::Button(Game* game) : Button(game, raylib::Vector2(0, 0), WHITE, "", 0, 0, WHITE) {}
+Button::Button(Game* game) : Button(game, [](Game* game) {}, raylib::Vector2(0, 0), WHITE, WHITE, "", 0, 0, WHITE) {}
 
-Button::Button(Game* game, raylib::Vector2 pos, raylib::Color color, std::string text, int margin, int fontSize, raylib::Color fontColor) : GameObject(game, pos), color(color), text(text), margin(margin), fontSize(fontSize), fontColor(fontColor) {}
+Button::Button(Game* game, void (*callback)(Game* game), raylib::Vector2 pos, raylib::Color color, raylib::Color hoverColor, std::string text, int margin, int fontSize, raylib::Color fontColor) : GameObject(game, pos), normalColor(color), color(color), text(text), margin(margin), fontSize(fontSize), fontColor(fontColor), callback(callback), hoverColor(hoverColor) {}
 
 void Button::update(float dt) {
 	raylib::Vector2 mousePos = GetMousePosition();
@@ -11,21 +13,22 @@ void Button::update(float dt) {
 	if (mousePos.x >= this->getPos().x && mousePos.y >= this->getPos().y && mousePos.x <= this->getPos().x + width + 2 * margin && mousePos.y <= this->getPos().y + fontSize + 2 * margin) { // if mouseclick inside button area
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			// If clicked
-			this->setText("Clicked");
+			callback(getGame());
 		} else {
 			// If hovered
-			this->setColor(raylib::Color::FromHSV(0, 68, 100));
+			this->setColor(hoverColor);
 		}
 	} else {
 		// Reset color
-		this->setColor(RED);
+		this->setColor(normalColor);
 	}
 }
 
 void Button::draw() {
 	int width = MeasureText(text.c_str(), fontSize);
 	DrawRectangle(this->getPos().x, this->getPos().y, width + 2 * margin, fontSize + 2 * margin, color);
-	DrawText(text, this->getPos().x + margin, this->getPos().y + margin, fontSize, fontColor);
+	getGame()->getFont()->DrawText(text, this->getPos() + raylib::Vector2(margin, margin), fontSize, 0, fontColor);
+	// DrawText(text, this->getPos().x + margin, this->getPos().y + margin, fontSize, fontColor);
 	// get size of text
 }
 

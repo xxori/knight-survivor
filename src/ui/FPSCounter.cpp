@@ -5,7 +5,7 @@
 int FPSCounter::maxCount = 60;
 
 // Initialise the Text parent class, and dt_average and count as 0
-FPSCounter::FPSCounter(Game* game) : Text(game, "fps: ", raylib::Vector2(10, 10), 20, GREEN), dtAverage(0), counter(0) {}
+FPSCounter::FPSCounter(Game* game) : Text(game, "fps: ", raylib::Vector2(10, 10), 24, GREEN), dtAverage(0), counter(0) {}
 
 void FPSCounter::update(float dt) {
 	// Add to the average

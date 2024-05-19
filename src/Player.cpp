@@ -1,6 +1,8 @@
 #include "Player.hpp"
+#include "Game.hpp"
 #include "weapon/FireStaff.hpp"
 #include "weapon/KnifeThrower.hpp"
+#include <iostream>
 #include <raylib-cpp.hpp>
 
 Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
@@ -8,8 +10,8 @@ Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rec
 	weapons.push_back(new KnifeThrower(game, 0.5));
 	invincibility = 3.0;
 	timeToDamage = invincibility;
+	health = 10;
 	direction = raylib::Vector2(1, 0);
-	health = 100;
 }
 Player::~Player() {
 	for (auto weapon : weapons) {
@@ -48,6 +50,11 @@ void Player::update(float dt) {
 	if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
 		movement.x++;
 	}
+	// just to test death menu, remove later
+	if (IsKeyDown(KEY_P)) {
+		health = 0;
+	}
+
 	raylib::Vector2 pos = getPos();
 	raylib::Vector2 dir = movement.Normalize();
 	if (dir.Length() != 0) {
@@ -61,6 +68,10 @@ void Player::takeDamage(int damage) {
 		timeToDamage = invincibility;
 		// Check for deaths here
 		health -= damage;
+		if (health <= 0) {
+			getGame()->setState(Dead);
+		}
+		std::cout << "Player took " << damage << " damage leaving them with " << health << " health" << std::endl;
 	}
 }
 
@@ -69,4 +80,16 @@ void Player::draw() {
 	DrawCircleV(getPos() + raylib::Vector2(20, 20), 20, BLACK);
 	// Uncomment to show collider
 	// DrawRectangleLinesEx(getCollider(), 1, raylib::Color::Red());
+}
+
+void Player::resetHealth() {
+	health = 100;
+}
+
+void Player::resetWeapons(Game* game) {
+	for (auto weapon : weapons) {
+		delete weapon;
+	}
+	weapons = {};
+	weapons.push_back(new FireStaff(game, 5));
 }

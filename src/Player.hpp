@@ -21,6 +21,8 @@ public:
 	void update(float dt) override;
 	void draw() override;
 	void takeDamage(int damage);
+	void resetHealth();
+	void resetWeapons(Game* game);
 
 	void setDirection(raylib::Vector2 direction);
 	raylib::Vector2 getDirection();
