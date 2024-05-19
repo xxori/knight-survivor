@@ -14,6 +14,15 @@ EntityTest::EntityTest() {
 	entity2 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(6, 6, 10, 10), nullptr);
 }
 
+EntityTest::~EntityTest() {
+	delete game;
+	game = nullptr;
+	delete entity1;
+	entity1 = nullptr;
+	delete entity2;
+	entity2 = nullptr;
+}
+
 void EntityTest::testCenter() {
 	std::cout << "Testing: EntityTest::testCenter\n";
 	raylib::Vector2 center { entity1->getCenter() };

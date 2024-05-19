@@ -12,5 +12,6 @@ private:
 
 public:
 	EntityTest();
+	~EntityTest();
 	void runAllTests();
 };
