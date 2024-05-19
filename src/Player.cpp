@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "weapon/FireStaff.hpp"
 #include "weapon/KnifeThrower.hpp"
+#include <iostream>
 #include <raylib-cpp.hpp>
 
 Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {

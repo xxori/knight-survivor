@@ -117,16 +117,16 @@ void Game::updateAll() {
 
 		case Playing:
 			Goblin::spawn(this, dt);
-	    player->update(dt);
-    	for (auto enemy : enemies)
-		    enemy->update(dt);
-	    enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
-    	for (size_t i = 0; i < objects.size(); i++) {
-		    objects[i]->update(dt);
-	    }
-	    objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
-	    for (auto uEntity : uiObjects) {
-		    uEntity->update(dt);
+			player->update(dt);
+			for (auto enemy : enemies)
+				enemy->update(dt);
+			enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
+			for (size_t i = 0; i < objects.size(); i++) {
+				objects[i]->update(dt);
+			}
+			objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
+			for (auto uEntity : playingUI) {
+				uEntity->update(dt);
 			}
 			if (IsKeyDown(KEY_ESCAPE) && !escapePressedLastFrame) setState(Paused);
 			break;
