@@ -18,13 +18,13 @@ void Enemy::takeDamage(int damage) {
 		getGame()->addObject(new DamageText(getGame(), damage, getPos() + raylib::Vector2(getCollider().width, 0)));
 		health -= damage;
 		timeToDamage = damageCooldown;
-		if (health <= 0) {
-			getGame()->removeEnemy(this);
-			// TODO: further processing i.e. leveling up player, etc..
-		}
 	}
 }
 void Enemy::update(float dt) {
+	if (health <= 0) {
+		getGame()->removeEnemy(this);
+		return;
+	}
 	timeToDamage -= dt;
 	Player* player = getGame()->getPlayer();
 	raylib::Vector2 playerPos { player->getCenter() };

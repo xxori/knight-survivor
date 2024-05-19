@@ -117,20 +117,16 @@ void Game::updateAll() {
 
 		case Playing:
 			Goblin::spawn(this, dt);
-			player->update(dt);
-			for (auto entity : enemies) {
-				if (entity != NULL)
-					entity->update(dt);
-			}
-			enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* i) { return i == NULL; }), enemies.end());
-			for (auto entity : objects) {
-				if (entity != NULL) {
-					entity->update(dt);
-				}
-			}
-			objects.erase(std::remove_if(objects.begin(), objects.end(), [](GameObject* i) { return i == NULL; }), objects.end());
-			for (auto uEntity : playingUI) {
-				uEntity->update(dt);
+	    player->update(dt);
+    	for (auto enemy : enemies)
+		    enemy->update(dt);
+	    enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
+    	for (size_t i = 0; i < objects.size(); i++) {
+		    objects[i]->update(dt);
+	    }
+	    objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
+	    for (auto uEntity : uiObjects) {
+		    uEntity->update(dt);
 			}
 			if (IsKeyDown(KEY_ESCAPE) && !escapePressedLastFrame) setState(Paused);
 			break;
@@ -215,12 +211,9 @@ void Game::addEnemy(Enemy* obj) {
 void Game::removeEnemy(Enemy* obj) {
 	auto it = std::find(enemies.begin(), enemies.end(), obj);
 	if (it != enemies.end()) {
-		if (obj != NULL) {
-			delete obj;
-			obj = nullptr;
-		}
 		*it = nullptr;
 	}
+	delete obj;
 }
 
 void Game::addObject(GameObject* obj) {
@@ -232,12 +225,9 @@ raylib::Font* Game::getFont() { return &font; }
 void Game::removeObject(GameObject* obj) {
 	auto it = std::find(objects.begin(), objects.end(), obj);
 	if (it != objects.end()) {
-		if (obj != NULL) {
-			delete obj;
-			obj = nullptr;
-		}
 		*it = nullptr;
 	}
+	delete obj;
 }
 
 void Game::addUIObject(GameObject* obj) {

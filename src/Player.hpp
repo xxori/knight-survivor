@@ -13,6 +13,7 @@ private:
 	std::vector<Weapon*> weapons;
 	float timeToDamage;
 	float invincibility;
+	raylib::Vector2 direction;
 
 public:
 	Player(Game* game);
@@ -22,4 +23,7 @@ public:
 	void takeDamage(int damage);
 	void resetHealth();
 	void resetWeapons(Game* game);
+
+	void setDirection(raylib::Vector2 direction);
+	raylib::Vector2 getDirection();
 };

@@ -1,21 +1,31 @@
 #include "Player.hpp"
 #include "Game.hpp"
 #include "weapon/FireStaff.hpp"
-#include <iostream>
+#include "weapon/KnifeThrower.hpp"
 #include <raylib-cpp.hpp>
 
 Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
 	weapons.push_back(new FireStaff(game, 5));
+	weapons.push_back(new KnifeThrower(game, 0.5));
 	invincibility = 3.0;
 	timeToDamage = invincibility;
-
-	health = 5;
+	health = 10;
+	direction = raylib::Vector2(1, 0);
 }
 Player::~Player() {
 	for (auto weapon : weapons) {
 		delete weapon;
 	}
 }
+
+void Player::setDirection(raylib::Vector2 dir) {
+	direction = dir;
+}
+
+raylib::Vector2 Player::getDirection() {
+	return direction;
+}
+
 void Player::update(float dt) {
 
 	if (timeToDamage > 0)
@@ -45,7 +55,11 @@ void Player::update(float dt) {
 	}
 
 	raylib::Vector2 pos = getPos();
-	setPos(pos + movement.Normalize() * dt * speed);
+	raylib::Vector2 dir = movement.Normalize();
+	if (dir.Length() != 0) {
+		setDirection(dir);
+	}
+	setPos(pos + dir * dt * speed);
 }
 
 void Player::takeDamage(int damage) {
