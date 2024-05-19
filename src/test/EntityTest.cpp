@@ -9,8 +9,9 @@ public:
 };
 
 EntityTest::EntityTest() {
-	entity1 = new TestingEntity(nullptr, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), nullptr);
-	entity2 = new TestingEntity(nullptr, raylib::Vector2(0, 0), raylib::Rectangle(6, 6, 10, 10), nullptr);
+	game = new Game();
+	entity1 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), nullptr);
+	entity2 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(6, 6, 10, 10), nullptr);
 }
 
 void EntityTest::testCenter() {

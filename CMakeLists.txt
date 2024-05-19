@@ -44,5 +44,6 @@ list(REMOVE_ITEM TEST_SOURCES ${CMAKE_SOURCE_DIR}/src/main.cpp)
 add_executable(test_runner ${CMAKE_SOURCE_DIR}/src/test/test.cpp ${TEST_SOURCES})
 set_target_properties(test_runner PROPERTIES CXX_STANDARD 20)
 target_link_libraries(test_runner PUBLIC raylib raylib_cpp)
+target_compile_definitions(test_runner PRIVATE BUILD_TEST_RUNNER)
 
 # That's it! You should have an example executable that you can run. Have fun!
