@@ -3,13 +3,7 @@
 #include "Rectangle.hpp"
 #include "Vector2.hpp"
 
-GameEntity::GameEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture) : localCollider(collider), GameObject(game, pos), texture(texture) {}
-
-GameEntity::~GameEntity() {
-	if (texture != nullptr) {
-		delete texture;
-	}
-}
+GameEntity::GameEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider) : localCollider(collider), GameObject(game, pos) {}
 
 raylib::Rectangle GameEntity::getCollider() {
 	raylib::Rectangle c = localCollider;

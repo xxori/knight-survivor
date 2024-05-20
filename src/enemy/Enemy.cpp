@@ -9,7 +9,7 @@ raylib::Vector2 Enemy::generateSpawnPosition() {
 	return this->getGame()->getPlayer()->getPos() + dir;
 }
 
-Enemy::Enemy(Game* game, raylib::Rectangle collider, raylib::Texture* texture, int health, int damage, float damageCooldown, float speed) : GameEntity(game, raylib::Vector2(0, 0), collider, texture), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed) {
+Enemy::Enemy(Game* game, raylib::Rectangle collider, int health, int damage, float damageCooldown, float speed) : GameEntity(game, raylib::Vector2(0, 0), collider), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed) {
 	this->setPos(this->generateSpawnPosition());
 }
 
