@@ -2,7 +2,7 @@
 #include "../Game.hpp"
 #include <cmath>
 
-Fireball::Fireball(Game* game, float speed, int damage) : Projectile(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 20, 20), nullptr, damage, speed), r(0), theta(0) {}
+Fireball::Fireball(Game* game, float speed, int damage) : Projectile(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 20, 20), damage, speed), r(0), theta(0) {}
 
 void Fireball::update(float dt) {
 	r += getSpeed() / 3 * dt;

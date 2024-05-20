@@ -9,7 +9,6 @@ private:
 	const static float damageCooldown;
 	const static float speed;
 	const static raylib::Rectangle collider;
-	static raylib::Texture* texture;
 	// TODO: Replace placeholder with texture
 	const static int placeholderRadius;
 

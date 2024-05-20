@@ -5,7 +5,7 @@
 #include <iostream>
 #include <raylib-cpp.hpp>
 
-Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40), nullptr), speed(100.0), weapons() {
+Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40)), speed(100.0), weapons() {
 	weapons.push_back(new FireStaff(game, 5));
 	weapons.push_back(new KnifeThrower(game, 0.5));
 	invincibility = 3.0;

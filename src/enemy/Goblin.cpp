@@ -10,9 +10,8 @@ const int Goblin::damage { 1 };
 const float Goblin::damageCooldown { 0.3 };
 const float Goblin::speed { 80 };
 const raylib::Rectangle Goblin::collider { -placeholderRadius, -placeholderRadius, placeholderRadius * 2, placeholderRadius * 2 };
-raylib::Texture* Goblin::texture { nullptr };
 
-Goblin::Goblin(Game* game) : Enemy(game, collider, texture, maxHealth, damage, damageCooldown, speed) {}
+Goblin::Goblin(Game* game) : Enemy(game, collider, maxHealth, damage, damageCooldown, speed) {}
 
 void Goblin::spawn(Game* game, float dt) {
 	Goblin::timeToSpawn -= dt;
