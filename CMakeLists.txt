@@ -3,6 +3,7 @@ project(game)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Debugging flags (Uncomment to enable)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
 
@@ -31,19 +32,18 @@ if (NOT raylib_cpp_FOUND)
     FetchContent_MakeAvailable(raylib_cpp)
 endif()
 
-# This is the main part:
-# Collect all .cpp files in the src/ directory and its subdirectories
+
+# Project
 file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 list(REMOVE_ITEM SOURCES ${CMAKE_SOURCE_DIR}/src/test/test.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib_cpp)
 
+# Test runner
 file(GLOB_RECURSE TEST_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 list(REMOVE_ITEM TEST_SOURCES ${CMAKE_SOURCE_DIR}/src/main.cpp)
 add_executable(test_runner ${CMAKE_SOURCE_DIR}/src/test/test.cpp ${TEST_SOURCES})
 set_target_properties(test_runner PROPERTIES CXX_STANDARD 20)
 target_link_libraries(test_runner PUBLIC raylib raylib_cpp)
 target_compile_definitions(test_runner PRIVATE BUILD_TEST_RUNNER)
-
-# That's it! You should have an example executable that you can run. Have fun!
