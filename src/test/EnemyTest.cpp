@@ -29,7 +29,6 @@ void EnemyTest::testHealth() {
 	} else {
 		std::cout << "❌ Fail: EnemyTest::testHealth\n";
 	}
-	std::cout << "\n";
 }
 
 void EnemyTest::testTakeDamage() {
@@ -41,7 +40,6 @@ void EnemyTest::testTakeDamage() {
 	} else {
 		std::cout << "❌ Fail: EnemyTest::testTakeDamage\n";
 	}
-	std::cout << "\n";
 }
 
 void EnemyTest::testTakeDamageWhenCooldown() {
@@ -53,7 +51,6 @@ void EnemyTest::testTakeDamageWhenCooldown() {
 	} else {
 		std::cout << "❌ Fail: EnemyTest::testTakeDamageWhenCooldown\n";
 	}
-	std::cout << "\n";
 }
 
 void EnemyTest::testSpawnPosition() {
@@ -65,7 +62,6 @@ void EnemyTest::testSpawnPosition() {
 	} else {
 		std::cout << "❌ Fail: EnemyTest::testSpawnPosition\n";
 	}
-	std::cout << "\n";
 }
 
 void EnemyTest::testDamage() {
@@ -76,13 +72,13 @@ void EnemyTest::testDamage() {
 	} else {
 		std::cout << "❌ Fail: EnemyTest::testDamage\n";
 	}
-	std::cout << "\n";
 }
 
 void EnemyTest::runAllTests() {
+	std::cout << "\n======== EnemyTest ========\n";
 	testHealth();
-	testDamage();
 	testTakeDamage();
 	testTakeDamageWhenCooldown();
 	testSpawnPosition();
+	testDamage();
 }

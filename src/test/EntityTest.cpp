@@ -29,7 +29,6 @@ void EntityTest::testCenter() {
 	} else {
 		std::cout << "❌ Fail: EntityTest::testCenter\n";
 	}
-	std::cout << "\n";
 }
 
 void EntityTest::testCollide() {
@@ -40,7 +39,6 @@ void EntityTest::testCollide() {
 	} else {
 		std::cout << "❌ Fail: EntityTest::testCollide\n";
 	}
-	std::cout << "\n";
 }
 
 void EntityTest::testCollider() {
@@ -52,7 +50,6 @@ void EntityTest::testCollider() {
 	} else {
 		std::cout << "❌ Fail: EntityTest::testCollider\n";
 	}
-	std::cout << "\n";
 }
 
 void EntityTest::testPosition() {
@@ -64,10 +61,10 @@ void EntityTest::testPosition() {
 	} else {
 		std::cout << "❌ Fail: EntityTest::testPosition\n";
 	}
-	std::cout << "\n";
 }
 
 void EntityTest::runAllTests() {
+	std::cout << "\n======== EntityTest ========\n";
 	testCenter();
 	testCollide();
 	testCollider();
