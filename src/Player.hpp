@@ -22,6 +22,7 @@ public:
 	void draw() override;
 	void takeDamage(int damage);
 	void resetHealth();
+	int getHealth();
 	void resetWeapons(Game* game);
 
 	void setDirection(raylib::Vector2 direction);

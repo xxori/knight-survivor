@@ -5,7 +5,7 @@
 
 raylib::Vector2 Enemy::generateSpawnPosition() {
 	double angle = GetRandomValue(0, 360) * PI / 180.0;
-	raylib::Vector2 dir = raylib::Vector2(SCREEN_WIDTH * cos(angle), SCREEN_WIDTH * sin(angle));
+	raylib::Vector2 dir = raylib::Vector2(SCREEN_WIDTH / 2.0 * cos(angle), SCREEN_WIDTH / 2.0 * sin(angle));
 	return this->getGame()->getPlayer()->getPos() + dir;
 }
 

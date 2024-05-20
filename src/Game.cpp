@@ -15,33 +15,47 @@ Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadM
 	addUIObject(new FPSCounter(this));
 	player = new Player(this);
 
+	// Load font
+#ifndef BUILD_TEST_RUNNER
+
 	font = raylib::Font("../res/Romulus.ttf", 64, 0, 350);
+
+#endif
 
 	// Main menu items
 	mainMenu.push_back(new Text(this, "Knight Survivors", raylib::Vector2(175, 100), 50, RED));
-	mainMenu.push_back(new Button(this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(200, 200), RED, BLUE, "Play", 12, 36, WHITE));
-	mainMenu.push_back(new Button(this, [](Game* game) { game->setState(Tutorial); }, raylib::Vector2(400, 200), RED, BLUE, "Tutorial", 12, 36, WHITE));
+	mainMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(200, 200), RED, BLUE, "Play", 12, 36, WHITE));
+	mainMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(Tutorial); }, raylib::Vector2(400, 200), RED, BLUE, "Tutorial", 12, 36, WHITE));
 
 	// Tutorial menu items
 	tutorialMenu.push_back(new Text(this, "Avoid enemies and stay alive for as long as possible!", raylib::Vector2(125, 100), 20, RED));
 	tutorialMenu.push_back(new Text(this, "Use WASD or arrow keys to move around", raylib::Vector2(175, 125), 20, RED));
 	tutorialMenu.push_back(new Text(this, "Avoid colliding with enemies, as this will make you lose health", raylib::Vector2(100, 150), 20, RED));
-	tutorialMenu.push_back(new Button(this, [](Game* game) { game->setState(MainMenu); }, raylib::Vector2(350, 250), RED, BLUE, "Back", 12, 36, WHITE));
+	tutorialMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(MainMenu); }, raylib::Vector2(350, 250), RED, BLUE, "Back", 12, 36, WHITE));
 
 	// Dead menu items
 	deadMenu.push_back(new Text(this, "You died!", raylib::Vector2(325, 100), 30, RED));
-	deadMenu.push_back(new Button(this, [](Game* game) { game->resetObjects(); game->getPlayer()->resetWeapons(game); game->getPlayer()->resetHealth(); game->resetEnemy(); game->setState(Playing); }, raylib::Vector2(310, 250), RED, BLUE, "Respawn", 12, 36, WHITE));
+	deadMenu.push_back(new Button(
+			this, [](Game* game) { game->resetObjects(); game->getPlayer()->resetWeapons(game); game->getPlayer()->resetHealth(); game->resetEnemy(); game->setState(Playing); }, raylib::Vector2(310, 250), RED, BLUE, "Respawn", 12, 36, WHITE));
 
 	// Pause menu items
 	pauseMenu.push_back(new Text(this, "Paused", raylib::Vector2(310, 100), 54, RED));
-	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Confirmation); }, raylib::Vector2(450, 250), RED, BLUE, "Quit", 12, 36, WHITE));
-	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(270, 250), RED, BLUE, "Back", 12, 36, WHITE));
-	pauseMenu.push_back(new Button(this, [](Game* game) { game->setState(MainMenu); }, raylib::Vector2(300, 350), RED, BLUE, "Main Menu", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(Confirmation); }, raylib::Vector2(450, 250), RED, BLUE, "Quit", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(Playing); }, raylib::Vector2(270, 250), RED, BLUE, "Back", 12, 36, WHITE));
+	pauseMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(MainMenu); }, raylib::Vector2(300, 350), RED, BLUE, "Main Menu", 12, 36, WHITE));
 
 	// Confirmation menu items
 	confirmationMenu.push_back(new Text(this, "Are you sure you want to quit?", raylib::Vector2(150, 100), 30, RED));
-	confirmationMenu.push_back(new Button(this, [](Game* game) { CloseWindow(); }, raylib::Vector2(420, 200), RED, BLUE, "YES", 12, 36, WHITE));
-	confirmationMenu.push_back(new Button(this, [](Game* game) { game->setState(Paused); }, raylib::Vector2(270, 200), RED, BLUE, "NO", 12, 36, WHITE));
+	confirmationMenu.push_back(new Button(
+			this, [](Game* game) { CloseWindow(); }, raylib::Vector2(420, 200), RED, BLUE, "YES", 12, 36, WHITE));
+	confirmationMenu.push_back(new Button(
+			this, [](Game* game) { game->setState(Paused); }, raylib::Vector2(270, 200), RED, BLUE, "NO", 12, 36, WHITE));
 }
 
 void Game::setState(GameState state) {

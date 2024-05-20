@@ -83,7 +83,7 @@ void Player::draw() {
 }
 
 void Player::resetHealth() {
-	health = 100;
+	health = 10;
 }
 
 void Player::resetWeapons(Game* game) {
@@ -92,4 +92,8 @@ void Player::resetWeapons(Game* game) {
 	}
 	weapons = {};
 	weapons.push_back(new FireStaff(game, 5));
+}
+
+int Player::getHealth() {
+	return health;
 }
