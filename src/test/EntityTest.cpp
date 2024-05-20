@@ -10,7 +10,7 @@ public:
 
 EntityTest::EntityTest(Game* game) {
 	entity1 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), nullptr);
-	entity2 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(6, 6, 10, 10), nullptr);
+	entity2 = new TestingEntity(game, raylib::Vector2(6, 6), raylib::Rectangle(0, 0, 10, 10), nullptr);
 }
 
 EntityTest::~EntityTest() {
@@ -43,7 +43,33 @@ void EntityTest::testCollide() {
 	std::cout << "\n";
 }
 
+void EntityTest::testCollider() {
+	std::cout << "Testing: EntityTest::testCollider\n";
+	raylib::Rectangle collider { entity1->getCollider() };
+	bool pass { collider.GetX() == 0 && collider.GetY() == 0 && collider.GetWidth() == 10 && collider.GetHeight() == 10 };
+	if (pass) {
+		std::cout << "✅ Pass: EntityTest::testCollider\n";
+	} else {
+		std::cout << "❌ Fail: EntityTest::testCollider\n";
+	}
+	std::cout << "\n";
+}
+
+void EntityTest::testPosition() {
+	std::cout << "Testing: EntityTest::testPosition\n";
+	raylib::Vector2 pos { entity1->getPos() };
+	bool pass { pos.GetX() == 0 && pos.GetY() == 0 };
+	if (pass) {
+		std::cout << "✅ Pass: EntityTest::testPosition\n";
+	} else {
+		std::cout << "❌ Fail: EntityTest::testPosition\n";
+	}
+	std::cout << "\n";
+}
+
 void EntityTest::runAllTests() {
 	testCenter();
 	testCollide();
+	testCollider();
+	testPosition();
 }

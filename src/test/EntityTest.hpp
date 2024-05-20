@@ -8,6 +8,8 @@ private:
 	GameEntity* entity2;
 	void testCenter();
 	void testCollide();
+	void testCollider();
+	void testPosition();
 
 public:
 	EntityTest(Game* game);
