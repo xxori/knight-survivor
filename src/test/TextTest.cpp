@@ -7,7 +7,6 @@ TextTest::TextTest(Game* game) {
 
 TextTest::~TextTest() {
 	delete text;
-	text = nullptr;
 }
 
 void TextTest::testSize() {

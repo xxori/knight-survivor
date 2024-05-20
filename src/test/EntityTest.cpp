@@ -3,21 +3,19 @@
 
 class TestingEntity : public GameEntity {
 public:
-	TestingEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* texture) : GameEntity(game, pos, collider, texture) {}
+	TestingEntity(Game* game, raylib::Vector2 pos, raylib::Rectangle collider) : GameEntity(game, pos, collider) {}
 	void update(float dt) override {}
 	void draw() override {}
 };
 
 EntityTest::EntityTest(Game* game) {
-	entity1 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), nullptr);
-	entity2 = new TestingEntity(game, raylib::Vector2(6, 6), raylib::Rectangle(0, 0, 10, 10), nullptr);
+	entity1 = new TestingEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10));
+	entity2 = new TestingEntity(game, raylib::Vector2(6, 6), raylib::Rectangle(0, 0, 10, 10));
 }
 
 EntityTest::~EntityTest() {
 	delete entity1;
-	entity1 = nullptr;
 	delete entity2;
-	entity2 = nullptr;
 }
 
 void EntityTest::testCenter() {

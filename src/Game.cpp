@@ -16,9 +16,7 @@ Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadM
 	player = new Player(this);
 
 	// Load font
-#ifdef BUILD_TEST_RUNNER
-
-#else
+#ifndef BUILD_TEST_RUNNER
 
 	font = raylib::Font("../res/Romulus.ttf", 64, 0, 350);
 

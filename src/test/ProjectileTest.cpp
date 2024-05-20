@@ -3,17 +3,16 @@
 
 class TestingProjectile : public Projectile {
 public:
-	TestingProjectile(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, raylib::Texture* tex, int damage, float speed) : Projectile(game, pos, collider, tex, damage, speed) {}
+	TestingProjectile(Game* game, raylib::Vector2 pos, raylib::Rectangle collider, int damage, float speed) : Projectile(game, pos, collider, damage, speed) {}
 	void draw() override {}
 };
 
 ProjectileTest::ProjectileTest(Game* game) {
-	projectile = new TestingProjectile(game, raylib::Vector2 { 0, 0 }, raylib::Rectangle { 0, 0, 6, 6 }, nullptr, 6, 666);
+	projectile = new TestingProjectile(game, raylib::Vector2 { 0, 0 }, raylib::Rectangle { 0, 0, 6, 6 }, 6, 666);
 }
 
 ProjectileTest::~ProjectileTest() {
 	delete projectile;
-	projectile = nullptr;
 }
 
 void ProjectileTest::testDamage() {

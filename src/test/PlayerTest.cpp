@@ -7,7 +7,6 @@ PlayerTest::PlayerTest(Game* game) {
 
 PlayerTest::~PlayerTest() {
 	delete player;
-	player = nullptr;
 }
 
 void PlayerTest::testTakeDamage() {

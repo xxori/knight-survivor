@@ -13,7 +13,6 @@ WeaponTest::WeaponTest(Game* game) {
 
 WeaponTest::~WeaponTest() {
 	delete weapon;
-	weapon = nullptr;
 }
 
 void WeaponTest::testName() {

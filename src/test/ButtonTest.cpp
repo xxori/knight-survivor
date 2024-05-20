@@ -8,7 +8,6 @@ ButtonTest::ButtonTest(Game* game) {
 
 ButtonTest::~ButtonTest() {
 	delete button;
-	button = nullptr;
 }
 
 void ButtonTest::testColor() {
