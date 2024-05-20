@@ -83,7 +83,7 @@ void Player::draw() {
 }
 
 void Player::resetHealth() {
-	health = 100;
+	health = 10;
 }
 
 void Player::resetWeapons(Game* game) {
