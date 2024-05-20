@@ -93,3 +93,7 @@ void Player::resetWeapons(Game* game) {
 	weapons = {};
 	weapons.push_back(new FireStaff(game, 5));
 }
+
+int Player::getHealth() {
+	return health;
+}
