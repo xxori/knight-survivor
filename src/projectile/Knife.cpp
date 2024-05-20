@@ -12,5 +12,5 @@ void Knife::update(float dt) {
 }
 
 void Knife::draw() {
-	DrawCircleV(getPos() + raylib::Vector2(5, 5), 5, ORANGE);
+	DrawCircleV(getPos() + raylib::Vector2(5, 5), 5, BROWN);
 }

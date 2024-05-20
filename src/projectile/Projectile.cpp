@@ -16,7 +16,7 @@ void Projectile::update(float dt) {
 	// Check collissions with all the enemies to damage them
 	for (auto enemy : getGame()->getEnemies()) {
 		if (enemy != NULL && enemy->collide(this))
-			enemy->takeDamage(damage);
+			enemy->takeDamage(damage, this);
 	}
 	raylib::Vector2 playerPos = getGame()->getPlayer()->getPos();
 	if (abs(getPos().x - playerPos.x) > SCREEN_WIDTH / 2.0 || abs(getPos().y - playerPos.y) > SCREEN_HEIGHT / 2.0)

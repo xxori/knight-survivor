@@ -43,6 +43,9 @@ private:
 
 	bool escapePressedLastFrame;
 
+	float time;
+	float lastTime;
+
 public:
 	Game();
 	~Game();

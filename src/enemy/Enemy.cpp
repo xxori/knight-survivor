@@ -1,4 +1,5 @@
 #include "Enemy.hpp"
+#include "../Coin.hpp"
 #include "../Game.hpp"
 #include "../ui/DamageText.hpp"
 #include "Vector2.hpp"
@@ -9,19 +10,21 @@ raylib::Vector2 Enemy::generateSpawnPosition() {
 	return this->getGame()->getPlayer()->getPos() + dir;
 }
 
-Enemy::Enemy(Game* game, raylib::Rectangle collider, int health, int damage, float damageCooldown, float speed) : GameEntity(game, raylib::Vector2(0, 0), collider), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed) {
+Enemy::Enemy(Game* game, raylib::Rectangle collider, int health, int damage, float damageCooldown, float speed) : GameEntity(game, raylib::Vector2(0, 0), collider), health(health), damage(damage), damageCooldown(damageCooldown), timeToDamage(damageCooldown), speed(speed), lastHit(nullptr) {
 	this->setPos(this->generateSpawnPosition());
 }
 
-void Enemy::takeDamage(int damage) {
-	if (timeToDamage <= 0) {
+void Enemy::takeDamage(int damage, Projectile* proj) {
+	if (timeToDamage <= 0 || lastHit != proj) {
 		getGame()->addObject(new DamageText(getGame(), damage, getPos() + raylib::Vector2(getCollider().width, 0)));
 		health -= damage;
 		timeToDamage = damageCooldown;
 	}
+	lastHit = proj;
 }
 void Enemy::update(float dt) {
 	if (health <= 0) {
+		getGame()->addObject(new Coin(getGame(), getPos()));
 		getGame()->removeEnemy(this);
 		return;
 	}

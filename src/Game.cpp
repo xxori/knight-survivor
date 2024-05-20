@@ -4,15 +4,19 @@
 #include "enemy/Goblin.hpp"
 #include "ui/Button.hpp"
 #include "ui/FPSCounter.hpp"
+#include "ui/HealthCount.hpp"
+#include "ui/XPLevelIndicator.hpp"
 #include <algorithm>
 #include <raylib-cpp.hpp>
 #include <raylib.h>
 
 // Initialise empty vectors, add critical entities like player, Background, FPS Counter
 // These addings could be broken out to a i.e. UI Manager class
-Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadMenu(), state(MainMenu), escapePressedLastFrame(false) {
+Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadMenu(), state(MainMenu), escapePressedLastFrame(false), time(0), lastTime(0) {
 	background = new Background(this, 25);
 	addUIObject(new FPSCounter(this));
+	addUIObject(new HealthCount(this));
+	addUIObject(new XPLevelIndicator(this));
 	player = new Player(this);
 
 	// Load font
@@ -132,6 +136,24 @@ void Game::updateAll() {
 		case Playing:
 			Goblin::spawn(this, dt);
 			player->update(dt);
+			time += dt;
+			if (time >= 15 && lastTime < 15) {
+				Goblin::spawnCooldown = 1.5f;
+				Goblin::speed = 60;
+			}
+			if (time >= 30 && lastTime < 30) {
+				Goblin::spawnCooldown = 1.0f;
+				Goblin::speed = 70;
+			}
+			if (time >= 45 && lastTime < 60) {
+				Goblin::spawnCooldown = 0.75f;
+				Goblin::speed = 90;
+			}
+			if (time >= 60 && lastTime < 60) {
+				Goblin::spawnCooldown = 0.5f;
+				Goblin::speed = 100;
+			}
+			lastTime = time;
 			for (auto enemy : enemies)
 				enemy->update(dt);
 			enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
@@ -249,6 +271,9 @@ void Game::addUIObject(GameObject* obj) {
 }
 
 void Game::resetEnemy() {
+	time = 0;
+	Goblin::spawnCooldown = 3.0f;
+	Goblin::speed = 50;
 	for (auto enemy : enemies) {
 		delete enemy;
 	}

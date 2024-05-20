@@ -31,7 +31,7 @@ void EnemyTest::testHealth() {
 
 void EnemyTest::testTakeDamage() {
 	std::cout << "Testing: EnemyTest::testTakeDamage\n";
-	enemy->takeDamage(3);
+	enemy->takeDamage(3, nullptr);
 	bool pass { enemy->getHealth() == 3 };
 	if (pass) {
 		std::cout << "✅ Pass: EnemyTest::testTakeDamage\n";
@@ -42,7 +42,7 @@ void EnemyTest::testTakeDamage() {
 
 void EnemyTest::testTakeDamageWhenCooldown() {
 	std::cout << "Testing: EnemyTest::testTakeDamageWhenCooldown\n";
-	enemyWithCooldown->takeDamage(3);
+	enemyWithCooldown->takeDamage(3, nullptr);
 	bool pass { enemyWithCooldown->getHealth() == 6 };
 	if (pass) {
 		std::cout << "✅ Pass: EnemyTest::testTakeDamageWhenCooldown\n";

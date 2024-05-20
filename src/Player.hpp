@@ -15,6 +15,11 @@ private:
 	float invincibility;
 	raylib::Vector2 direction;
 
+	int level;
+	int experience;
+
+	void addRandomWeapon();
+
 public:
 	Player(Game* game);
 	~Player();
@@ -24,6 +29,10 @@ public:
 	void resetHealth();
 	int getHealth();
 	void resetWeapons(Game* game);
+
+	int getXp();
+	void setXp(int xp);
+	int getLevel();
 
 	void setDirection(raylib::Vector2 direction);
 	raylib::Vector2 getDirection();

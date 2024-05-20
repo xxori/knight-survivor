@@ -2,12 +2,16 @@
 #include "Game.hpp"
 #include "weapon/FireStaff.hpp"
 #include "weapon/KnifeThrower.hpp"
+#include "weapon/MissileBook.hpp"
 #include <iostream>
 #include <raylib-cpp.hpp>
+#include <raylib.h>
 
-Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40)), speed(100.0), weapons() {
-	weapons.push_back(new FireStaff(game, 5));
-	weapons.push_back(new KnifeThrower(game, 0.5));
+Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40)), speed(100.0), weapons(), level(1), experience(0) {
+	addRandomWeapon();
+	// weapons.push_back(new FireStaff(game, 5));
+	// weapons.push_back(new KnifeThrower(game, 0.5));
+	// weapons.push_back(new MissileBook(game, 3));
 	invincibility = 3.0;
 	timeToDamage = invincibility;
 	health = 10;
@@ -18,6 +22,24 @@ Player::~Player() {
 		delete weapon;
 	}
 }
+
+void Player::addRandomWeapon() {
+	switch (GetRandomValue(1, 3)) {
+		case 1:
+			weapons.push_back(new FireStaff(getGame(), 5));
+			break;
+		case 2:
+			weapons.push_back(new KnifeThrower(getGame(), 0.5));
+			break;
+		case 3:
+			weapons.push_back(new MissileBook(getGame(), 5));
+			break;
+	}
+}
+
+int Player::getXp() { return experience; }
+void Player::setXp(int xp) { experience = xp; }
+int Player::getLevel() { return level; }
 
 void Player::setDirection(raylib::Vector2 dir) {
 	direction = dir;
@@ -31,6 +53,17 @@ void Player::update(float dt) {
 
 	if (timeToDamage > 0)
 		timeToDamage -= dt;
+
+	if (experience > level * 5) {
+		level += 1;
+		experience = 0;
+		health += 1;
+		if (speed < 300) {
+			speed += 15;
+		}
+		addRandomWeapon();
+		std::cout << "Level Up\n";
+	}
 
 	for (auto weapon : weapons) {
 		weapon->update(dt);
@@ -84,6 +117,8 @@ void Player::draw() {
 
 void Player::resetHealth() {
 	health = 10;
+	level = 1;
+	experience = 0;
 }
 
 void Player::resetWeapons(Game* game) {
@@ -91,7 +126,7 @@ void Player::resetWeapons(Game* game) {
 		delete weapon;
 	}
 	weapons = {};
-	weapons.push_back(new FireStaff(game, 5));
+	addRandomWeapon();
 }
 
 int Player::getHealth() {

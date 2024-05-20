@@ -1,0 +1,13 @@
+#include "MissileBook.hpp"
+#include "../Game.hpp"
+#include "../projectile/MagicMissile.hpp"
+
+MissileBook::MissileBook(Game* game, float fireSpeed) : Weapon(game, "Magic Book", fireSpeed) {}
+
+void MissileBook::update(float dt) {
+	setTimeToFire(getTimeToFire() - dt);
+	if (getTimeToFire() <= 0) {
+		setTimeToFire(getFireSpeed());
+		getGame()->addObject(new MagicMissile(getGame(), 100, 3, 7));
+	}
+}

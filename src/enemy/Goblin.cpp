@@ -8,8 +8,8 @@ const int Goblin::placeholderRadius = 15;
 const int Goblin::maxHealth { 10 };
 const int Goblin::damage { 1 };
 const float Goblin::damageCooldown { 0.3 };
-const float Goblin::speed { 80 };
-const raylib::Rectangle Goblin::collider { -placeholderRadius, -placeholderRadius, placeholderRadius * 2, placeholderRadius * 2 };
+float Goblin::speed { 50 };
+const raylib::Rectangle Goblin::collider { -placeholderRadius + 3, -placeholderRadius + 3, placeholderRadius * 2 - 6, placeholderRadius * 2 - 6 };
 
 Goblin::Goblin(Game* game) : Enemy(game, collider, maxHealth, damage, damageCooldown, speed) {}
 
@@ -30,4 +30,4 @@ void Goblin::draw() {
 }
 
 float Goblin::timeToSpawn = 0.0f;
-const float Goblin::spawnCooldown = 1.0f;
+float Goblin::spawnCooldown = 3.0f;
