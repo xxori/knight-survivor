@@ -8,6 +8,9 @@ private:
 	Enemy* enemyWithCooldown;
 	void testTakeDamage();
 	void testTakeDamageWhenCooldown();
+	void testHealth();
+	void testSpawnPosition();
+	void testDamage();
 
 public:
 	EnemyTest(Game* game);
