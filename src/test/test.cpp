@@ -1,6 +1,7 @@
 #include "ButtonTest.hpp"
 #include "EnemyTest.hpp"
 #include "EntityTest.hpp"
+#include "PlayerTest.hpp"
 #include "ProjectileTest.hpp"
 #include "TextTest.hpp"
 #include "WeaponTest.hpp"
@@ -21,5 +22,7 @@ int main() {
 	textTest.runAllTests();
 	ButtonTest buttonTest(&game);
 	buttonTest.runAllTests();
+	PlayerTest playerTest(&game);
+	playerTest.runAllTests();
 	return 0;
 }
