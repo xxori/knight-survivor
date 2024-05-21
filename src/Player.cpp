@@ -7,7 +7,7 @@
 #include <raylib-cpp.hpp>
 #include <raylib.h>
 
-Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40)), speed(100.0), weapons(), level(1), experience(0) {
+Player::Player(Game* game) : GameEntity(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 40, 40)), speed(125.0), weapons(), level(1), experience(0) {
 	addRandomWeapon();
 	// weapons.push_back(new FireStaff(game, 5));
 	// weapons.push_back(new KnifeThrower(game, 0.5));
@@ -118,6 +118,7 @@ void Player::draw() {
 void Player::resetHealth() {
 	health = 10;
 	level = 1;
+	speed = 125;
 	experience = 0;
 }
 
@@ -131,4 +132,8 @@ void Player::resetWeapons(Game* game) {
 
 int Player::getHealth() {
 	return health;
+}
+
+float Player::getSpeed() {
+	return speed;
 }

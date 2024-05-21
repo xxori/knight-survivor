@@ -33,6 +33,7 @@ public:
 	int getXp();
 	void setXp(int xp);
 	int getLevel();
+	float getSpeed();
 
 	void setDirection(raylib::Vector2 direction);
 	raylib::Vector2 getDirection();
