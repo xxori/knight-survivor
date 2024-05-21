@@ -2,8 +2,10 @@
 
 #include "GameObject.hpp"
 
+// A physical entity that exists in the world and has collision
 class GameEntity : public GameObject {
 private:
+	// A collider for the entity in local space
 	raylib::Rectangle localCollider;
 
 public:

@@ -3,6 +3,7 @@
 #include "Projectile.hpp"
 
 MagicMissile::MagicMissile(Game* game, float speed, int damage, float lifespan) : Projectile(game, raylib::Vector2(0, 0), raylib::Rectangle(0, 0, 10, 10), damage, speed), lifespan((lifespan)) {
+	// The missile begins at the players center
 	setPos(game->getPlayer()->getCenter());
 }
 
@@ -13,6 +14,7 @@ void MagicMissile::update(float dt) {
 		return;
 	}
 
+	// Find the closest enemy
 	Enemy* e = nullptr;
 	float minDist = 1000000;
 
@@ -24,6 +26,7 @@ void MagicMissile::update(float dt) {
 		}
 	}
 
+	//  Move towards the enemy if it exists, otherwise dont move
 	if (e != nullptr) {
 		raylib::Vector2 dir = (e->getPos() - getPos()).Normalize();
 		setPos(getPos() + dir * dt * getSpeed());

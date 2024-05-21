@@ -2,6 +2,7 @@
 
 #include "../common/GameEntity.hpp"
 
+// A generic projectile that flies around the screen and deals damage to enemies
 class Projectile : public GameEntity {
 private:
 	int damage;

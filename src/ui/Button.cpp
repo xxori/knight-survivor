@@ -10,6 +10,7 @@ void Button::update(float dt) {
 	raylib::Vector2 mousePos = GetMousePosition();
 	int width = MeasureText(text.c_str(), fontSize);
 
+	// Check mouse posiion against button size to determing hover and click
 	if (mousePos.x >= this->getPos().x && mousePos.y >= this->getPos().y && mousePos.x <= this->getPos().x + width + 2 * margin && mousePos.y <= this->getPos().y + fontSize + 2 * margin) { // if mouseclick inside button area
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 			// If clicked
@@ -25,11 +26,11 @@ void Button::update(float dt) {
 }
 
 void Button::draw() {
+	// Get width of text and use it along with font size and margin
+	// to draw the button background rectangle.
 	int width = MeasureText(text.c_str(), fontSize);
 	DrawRectangle(this->getPos().x, this->getPos().y, width + 2 * margin, fontSize + 2 * margin, color);
 	getGame()->getFont()->DrawText(text, this->getPos() + raylib::Vector2(margin, margin), fontSize, 0, fontColor);
-	// DrawText(text, this->getPos().x + margin, this->getPos().y + margin, fontSize, fontColor);
-	// get size of text
 }
 
 raylib::Color Button::getColor() { return color; }

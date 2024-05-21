@@ -2,8 +2,11 @@
 
 #include "./Projectile.hpp"
 
+// A magic missile that seeks out the nearest enemy
 class MagicMissile : public Projectile {
 private:
+	// The magic missile has a set lifespan as it could
+	// otherwise stay on screen forever.
 	float lifespan;
 
 public:

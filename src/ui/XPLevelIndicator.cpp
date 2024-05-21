@@ -9,5 +9,7 @@ void XPLevelIndicator::update(float dt) {
 	Player* player = getGame()->getPlayer();
 	setText(std::format("XP: {}/{}\n\nLevel: {}", player->getXp(), player->getLevel() * 5, player->getLevel()));
 	auto width = raylib::MeasureText(getText(), 36);
+
+	// The xp indicator is placed in the bottom right of screen
 	setPos(raylib::Vector2(SCREEN_WIDTH - width - 10, SCREEN_HEIGHT - 72 - 10));
 }

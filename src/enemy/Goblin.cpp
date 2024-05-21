@@ -13,6 +13,7 @@ const raylib::Rectangle Goblin::collider { -placeholderRadius + 3, -placeholderR
 
 Goblin::Goblin(Game* game) : Enemy(game, collider, maxHealth, damage, damageCooldown, speed) {}
 
+// Static method that spawns goblins over time
 void Goblin::spawn(Game* game, float dt) {
 	Goblin::timeToSpawn -= dt;
 	if (Goblin::timeToSpawn <= 0) {

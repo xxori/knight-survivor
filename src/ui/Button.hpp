@@ -2,15 +2,28 @@
 
 #include "../common/GameObject.hpp"
 
+// A button that displays text and performs an action on click
 class Button : public GameObject {
 private:
 	std::string text;
+
+	// Space between text and color border
 	int margin;
+
 	int fontSize;
+
 	raylib::Color fontColor;
-	raylib::Color color; // current color;
+
+	// Font color when mouse is hovering
 	const raylib::Color hoverColor;
+	// The default non-hover font color
 	const raylib::Color normalColor;
+
+	// The current button color
+	raylib::Color color;
+
+	// A function pointer for the callback when ubtton is clicked,
+	// performing an operation using the game pointer
 	void (*callback)(Game*);
 
 public:

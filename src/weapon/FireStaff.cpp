@@ -2,9 +2,10 @@
 #include "../Game.hpp"
 #include "../projectile/Fireball.hpp"
 
-FireStaff::FireStaff(Game* game, float fireSpeed) : Weapon(game, "Fire Staff", fireSpeed) {}
+FireStaff::FireStaff(Game* game, float fireSpeed) : Weapon(game, fireSpeed) {}
 
 void FireStaff::update(float dt) {
+	// Spawn in a fireball when cooldown is finished
 	setTimeToFire(getTimeToFire() - dt);
 	if (getTimeToFire() <= 0) {
 		setTimeToFire(getFireSpeed());

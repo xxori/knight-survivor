@@ -2,6 +2,7 @@
 
 #include "./Projectile.hpp"
 
+// A knife projectile that shoots rapidly and travels in a straight line
 class Knife : public Projectile {
 private:
 	raylib::Vector2 dir;

@@ -2,13 +2,13 @@
 
 #include "Enemy.hpp"
 
+// A simple goblin enemy that moves in a straight line towards the player
 class Goblin : public Enemy {
 private:
 	const static int maxHealth;
 	const static int damage;
 	const static float damageCooldown;
 	const static raylib::Rectangle collider;
-	// TODO: Replace placeholder with texture
 	const static int placeholderRadius;
 
 public:

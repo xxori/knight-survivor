@@ -2,9 +2,10 @@
 #include "../Game.hpp"
 #include "../projectile/MagicMissile.hpp"
 
-MissileBook::MissileBook(Game* game, float fireSpeed) : Weapon(game, "Magic Book", fireSpeed) {}
+MissileBook::MissileBook(Game* game, float fireSpeed) : Weapon(game, fireSpeed) {}
 
 void MissileBook::update(float dt) {
+	// Spawn in a magic missile when cooldown is finished
 	setTimeToFire(getTimeToFire() - dt);
 	if (getTimeToFire() <= 0) {
 		setTimeToFire(getFireSpeed());
