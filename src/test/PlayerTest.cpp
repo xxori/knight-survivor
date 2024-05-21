@@ -13,7 +13,7 @@ void PlayerTest::testTakeDamage() {
 	std::cout << "Testing: PlayerTest::testTakeDamage\n";
 	player->update(6);
 	player->takeDamage(2);
-	bool pass { player->getHealth() == 8 };
+	bool pass { player->getHealth() == 3 };
 	if (pass) {
 		std::cout << "✅ Pass: PlayerTest::testTakeDamage\n";
 	} else {
@@ -21,14 +21,14 @@ void PlayerTest::testTakeDamage() {
 	}
 }
 
-void PlayerTest::testResetHealth() {
-	std::cout << "Testing: PlayerTest::testResetHealth\n";
-	player->resetHealth();
-	bool pass { player->getHealth() == 10 };
+void PlayerTest::testResetStats() {
+	std::cout << "Testing: PlayerTest::testResetStats\n";
+	player->resetStats();
+	bool pass { player->getHealth() == 5 && player->getLevel() == 1 && player->getXp() == 0 && player->getSpeed() == 125.0 };
 	if (pass) {
-		std::cout << "✅ Pass: PlayerTest::testResetHealth\n";
+		std::cout << "✅ Pass: PlayerTest::testResetStats\n";
 	} else {
-		std::cout << "❌ Fail: PlayerTest::testResetHealth\n";
+		std::cout << "❌ Fail: PlayerTest::testResetStats\n";
 	}
 }
 
@@ -46,6 +46,6 @@ void PlayerTest::testDirection() {
 void PlayerTest::runAllTests() {
 	std::cout << "\n======== PlayerTest ========\n";
 	testTakeDamage();
-	testResetHealth();
+	testResetStats();
 	testDirection();
 }

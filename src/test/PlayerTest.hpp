@@ -5,7 +5,7 @@ class PlayerTest {
 private:
 	Player* player;
 	void testTakeDamage();
-	void testResetHealth();
+	void testResetStats();
 	void testDirection();
 
 public:

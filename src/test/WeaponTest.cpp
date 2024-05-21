@@ -3,27 +3,16 @@
 
 class TestingWeapon : public Weapon {
 public:
-	TestingWeapon(Game* game, std::string name, int fireSpeed) : Weapon(game, name, fireSpeed) {}
+	TestingWeapon(Game* game, int fireSpeed) : Weapon(game, fireSpeed) {}
 	void update(float dt) override {}
 };
 
 WeaponTest::WeaponTest(Game* game) {
-	weapon = new TestingWeapon(game, "Test Weapon", 6);
+	weapon = new TestingWeapon(game, 6);
 }
 
 WeaponTest::~WeaponTest() {
 	delete weapon;
-}
-
-void WeaponTest::testName() {
-	std::cout << "Testing: WeaponTest::testName\n";
-	std::string name { weapon->getName() };
-	bool pass { name == "Test Weapon" };
-	if (pass) {
-		std::cout << "✅ Pass: WeaponTest::testName\n";
-	} else {
-		std::cout << "❌ Fail: WeaponTest::testName\n";
-	}
 }
 
 void WeaponTest::testFireSpeed() {
@@ -50,7 +39,6 @@ void WeaponTest::testTimeToFire() {
 
 void WeaponTest::runAllTests() {
 	std::cout << "\n======== WeaponTest ========\n";
-	testName();
 	testFireSpeed();
 	testTimeToFire();
 }
