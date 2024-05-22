@@ -60,7 +60,7 @@ Game::Game() : enemies(), objects(), playingUI(), mainMenu(), pauseMenu(), deadM
 	// Confirmation menu items
 	confirmationMenu.push_back(new Text(this, "Are you sure you want to quit?", raylib::Vector2(150, 100), 30, RED));
 	confirmationMenu.push_back(new Button(
-			this, [](Game* game) { CloseWindow(); }, raylib::Vector2(420, 200), RED, BLUE, "YES", 12, 36, WHITE));
+			this, [](Game* game) { game->saveHighScore(); CloseWindow(); exit(0); }, raylib::Vector2(420, 200), RED, BLUE, "YES", 12, 36, WHITE));
 	confirmationMenu.push_back(new Button(
 			this, [](Game* game) { game->setState(Paused); }, raylib::Vector2(270, 200), RED, BLUE, "NO", 12, 36, WHITE));
 }
@@ -174,6 +174,10 @@ void Game::updateAll() {
 			if (time >= 60 && time - dt < 60) {
 				Goblin::spawnCooldown = 0.5f;
 				Goblin::speed = 100;
+			}
+			if (time >= 120 && time - dt < 120) {
+				Goblin::spawnCooldown = 0.25f;
+				Goblin::speed = 110;
 			}
 
 			// Tick all enemies and objects, and remove nullptrs from deletions
