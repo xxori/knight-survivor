@@ -177,10 +177,13 @@ void Game::updateAll() {
 			}
 
 			// Tick all enemies and objects, and remove nullptrs from deletions
-			for (auto enemy : enemies)
-				enemy->update(dt);
+			for (size_t i = 0; i < enemies.size(); i++) {
+				if (enemies[i] == nullptr) continue;
+				enemies[i]->update(dt);
+			}
 			enemies.erase(std::remove(enemies.begin(), enemies.end(), nullptr), enemies.end());
 			for (size_t i = 0; i < objects.size(); i++) {
+				if (objects[i] == nullptr) continue;
 				objects[i]->update(dt);
 			}
 			objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
