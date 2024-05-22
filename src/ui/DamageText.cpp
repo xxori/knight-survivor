@@ -7,6 +7,7 @@ DamageText::DamageText(Game* game, int damage, raylib::Vector2 pos, float lifesp
 
 void DamageText::update(float dt) {
 	lifespan -= dt;
+	// Delete the damagetext if the countdown has expired
 	if (lifespan <= 0) {
 		getGame()->removeObject(this);
 	}

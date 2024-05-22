@@ -8,9 +8,9 @@ int main() {
 	SetConfigFlags(FLAG_VSYNC_HINT);
 	raylib::Window window(SCREEN_WIDTH, SCREEN_HEIGHT, "Knight Survivors");
 
-	// SetTargetFPS(60);
-
+	// Construct game and load highscore from file
 	Game game = Game();
+	game.loadHighScore();
 
 	// Create a 2D camera centered on the player
 	// This allows us to use rotation and zoom in the future
@@ -24,9 +24,13 @@ int main() {
 	// Simple game loop, closes when press Q or x button
 	while (!window.ShouldClose()) {
 		game.updateAll();
+
+		// We want our camera centered on the player
 		camera.target = game.getPlayer()->getPos();
 		game.drawAll(camera);
 	}
 
+	// Save our highscore to a file
+	game.saveHighScore();
 	return 0;
 }

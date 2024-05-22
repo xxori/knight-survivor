@@ -9,6 +9,7 @@
 const int SCREEN_HEIGHT = 450;
 const int SCREEN_WIDTH = 800;
 
+// All possible states the game can be in at any one time
 enum GameState { Playing,
 								 MainMenu,
 								 Paused,
@@ -28,9 +29,10 @@ private:
 	std::vector<GameObject*> objects; // Other objects including projectiles
 	GameObject* background;
 
-	// All UI elements that are rendered using absolute coordinates on the screen
+	// All HUD elements that are rendered using absolute coordinates on the screen
 	std::vector<GameObject*> playingUI;
 
+	// The different game menus are stored as a collection of gameobjects
 	std::vector<GameObject*> mainMenu;
 	std::vector<GameObject*> pauseMenu;
 	std::vector<GameObject*> deadMenu;
@@ -41,25 +43,46 @@ private:
 
 	raylib::Font font;
 
+	// So that the pause menu doesn't flash every frame,
+	// we need to detect when escape goes from unpressed to pressed.
 	bool escapePressedLastFrame;
+
+	// For the sake of score and increasing difficulty, we store
+	// gametime and high score time.
+	float time;
+	float highScore;
 
 public:
 	Game();
 	~Game();
 
 	void updateAll();
+	// Draw all objects relative to a camera
 	void drawAll(raylib::Camera2D camera);
+
+	// Return references to all enemies
+	std::vector<Enemy*> getEnemies();
+
+	// Add and remove objects from game
 	void addEnemy(Enemy* entity);
 	void removeEnemy(Enemy* entity);
 	void addObject(GameObject* obj);
 	void removeObject(GameObject* obj);
-	void addUIObject(GameObject* entity);
+
 	void setState(GameState state);
-	std::vector<Enemy*> getEnemies();
+
+	// Reset enemies and objects on game reset
 	void resetEnemy();
 	void resetObjects();
 
+	float getTime();
+	float getHighScore();
+
 	raylib::Font* getFont();
+
+	// Load and save highscore to a file
+	void saveHighScore();
+	void loadHighScore();
 
 	// Get a reference to the player object
 	Player* getPlayer();

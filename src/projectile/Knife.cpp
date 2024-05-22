@@ -7,10 +7,11 @@ Knife::Knife(Game* game, float speed, int damage, raylib::Vector2 direction) : P
 }
 
 void Knife::update(float dt) {
+	// Travel in a constant direction
 	setPos(getPos() + dir * dt * getSpeed());
 	Projectile::update(dt);
 }
 
 void Knife::draw() {
-	DrawCircleV(getPos() + raylib::Vector2(5, 5), 5, ORANGE);
+	DrawCircleV(getPos() + raylib::Vector2(5, 5), 5, YELLOW);
 }

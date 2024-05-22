@@ -5,7 +5,6 @@
 class WeaponTest {
 private:
 	Weapon* weapon;
-	void testName();
 	void testFireSpeed();
 	void testTimeToFire();
 

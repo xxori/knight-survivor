@@ -26,5 +26,3 @@ void Background::draw() {
 		}
 	}
 }
-// We can hijack this code to maybe show random tiles or something, but itd probably
-// be easier to make one massive tile texture and tile it over and over

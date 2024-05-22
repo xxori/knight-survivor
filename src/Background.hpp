@@ -3,8 +3,8 @@
 #include "common/GameObject.hpp"
 
 // Background texture class
-// For now, it prints a moving infinite checkerboard
-// TODO: We should make it an image later
+// It draws a checkerboard pattern that moves as the player moves,
+// giving the illusion of an infinite plane.
 class Background : public GameObject {
 private:
 	// Size of each square in checkerboard
