@@ -6,19 +6,21 @@ Object Oriented Programming Major Practical Assignment
 
 To build this project, make sure to have CMake installed locally.
 
-### Desktop
-
-```
+```sh
 mkdir build
 cd build
-cmake ..
+cmake .. # Debug
+cmake -DCMAKE_BUILD_TYPE=Release .. # Release
 make
 ```
 
 ## Run
 
-```
-./game
+In `build` folder
+
+```sh
+./game # Game
+./test_runner # Tests
 ```
 
 ## Class Diagram
