@@ -3,9 +3,16 @@ project(game)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Debugging flags (Uncomment to enable)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")
-#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O0")
+# Set default build type to Debug if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
+# Set compiler flags for different build types
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_C_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_C_FLAGS_RELEASE "-O2")
 
 # raylib
 find_package(raylib QUIET)
