@@ -1,4 +1,4 @@
-# UOA OOP Project
+# Knight Survivor
 
 Object Oriented Programming Major Practical Assignment
 
